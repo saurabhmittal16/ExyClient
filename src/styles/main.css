@@ -304,5 +304,105 @@ template {
 [hidden] {
   display: none; }
 
-h1 {
-  color: red; }
+.container_header {
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-between; }
+  .container_header * {
+    display: inline; }
+  .container_header .icons {
+    margin-right: 10px;
+    padding: 0 5px;
+    height: 40px; }
+    .container_header .icons i {
+      font-size: 24px;
+      height: 40px;
+      padding-top: 8px;
+      color: black;
+      display: flex;
+      align-self: center; }
+    .container_header .icons:hover {
+      background-color: #efefef; }
+  .container_header .photo__avatar {
+    height: 40px;
+    width: 40px;
+    vertical-align: middle; }
+  .container_header .name {
+    font-size: 20px;
+    text-align: center;
+    line-height: 34px;
+    border: solid 2px grey;
+    padding: 0 5px;
+    margin: auto 5px;
+    height: 34px;
+    display: flex;
+    align-self: center; }
+    .container_header .name * {
+      color: black; }
+
+.text_logo {
+  letter-spacing: 2px;
+  font-weight: 800;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-top: 5px;
+  line-height: 32px;
+  font-family: 'Montserrat', sans-serif; }
+
+.container_80 {
+  padding: 30px;
+  margin: auto;
+  max-width: 1200px; }
+
+.container_header .icons:hover {
+  background-color: transparent; }
+
+.ant-layout-sider {
+  background: white;
+  font-size: 16px; }
+  .ant-layout-sider i.anticon {
+    font-size: 25px; }
+
+.ant-layout-sider-children * {
+  background-color: transparent; }
+
+.ant-layout-sider-trigger {
+  background-color: transparent; }
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: transparent; }
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected i {
+    color: white; }
+
+.ant-menu-item-active {
+  background-color: transparent; }
+  .ant-menu-item-active i {
+    color: rgba(255, 255, 255, 0.767); }
+
+.ant-menu-inline-collapsed > .ant-menu-item .anticon {
+  font-size: 25px;
+  line-height: 45px; }
+
+.ant-menu-inline > .ant-menu-item {
+  line-height: 45px;
+  height: 50px; }
+
+.ant-menu-vertical > .ant-menu-item {
+  line-height: 45px;
+  height: 50px; }
+
+.ant-menu-inline-collapsed {
+  width: 100%; }
+
+.ant-layout-sider-trigger {
+  background: #eee;
+  color: black; }
+
+.admin_header {
+  box-shadow: 0 0px 3px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+  z-index: 10;
+  background: #fff;
+  padding: 7px 20px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #0277bdcf; }
