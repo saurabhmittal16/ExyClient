@@ -2,18 +2,17 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Icon, Layout, Menu, Popover } from 'antd';
+import { Icon, Layout, Menu, Popover, Divider } from 'antd';
 
 import config from '../config';
-const {Content, Sider} = Layout;
+import { removeCurrentUser } from '../actions/authAction';
 
+const {Content, Sider} = Layout;
 const sider = [
-    ["dashboard", "/"],
-    ["file-done", "/"],
-    ["dropbox", "/"],
-    ["picture", "/"],
-    ["bar-chart", "/"],
-    ["eye", "/"]
+    ["dashboard", "/", "Dashboard"],
+    ["file-done", "/", "Albums"],
+    ["wifi", "/", "Surveys"],
+    ["user", "/", "Profile"],
 ]
 
 class Container extends React.Component {
@@ -26,12 +25,18 @@ class Container extends React.Component {
             name: '',
             image: ''
         };
+        this.logout = this.logout.bind(this);
     }
 
     componentWillMount() {
         axios.get(`${config.server_url}/api/sub-admin/`).then(
             res => console.log(res)
         );
+    }
+
+    logout() {
+        localStorage.clear();
+        this.props.dispatch(removeCurrentUser());
     }
 
     onCollapse = (collapsed) => {
@@ -61,6 +66,11 @@ class Container extends React.Component {
                                 arrowPointAtCenter
                                 style={{padding: 0}}
                                 trigger={['click']}
+                                content={
+                                    <div style={{cursor: 'pointer'}} onClick={this.logout}>
+                                        Logout
+                                    </div>
+                                }
                             >
                                 <img 
                                     src="https://cdn2.iconfinder.com/data/icons/social-media-8/512/Chrome.png" 
@@ -86,14 +96,14 @@ class Container extends React.Component {
                             theme="dark" 
                             mode="inline" 
                             defaultSelectedKeys={[this.getCurrentSider()]}
-                            style={{width: '85px'}}
+                            style={{width: '85px', marginTop: '5px'}}
                         >
                         {
                             sider.map(
                                 (item, index) => (
                                     <Menu.Item 
                                         key={index+1}
-                                        title={item[0]}
+                                        title={item[2]}
                                     >
                                         <Link to={item[1]}>
                                             <Icon type={item[0]} theme="outlined" />
@@ -102,6 +112,18 @@ class Container extends React.Component {
                                 )
                             )
                         }
+                            <hr style={{color: 'white', width: '70%'}} />
+                            <Icon 
+                                style={{
+                                    borderRadius: '50%',
+                                    backgroundColor: '#60c2e6',
+                                    margin: '19px',
+                                    padding: '15px',
+                                    fontSize: '18px',
+                                    cursor: 'pointer'
+                                }}
+                                type='plus' 
+                            />
                         </Menu>
                     </Sider>
                     <Content style={{margin: '20px 20px', overflow: 'scrollable'}}>
