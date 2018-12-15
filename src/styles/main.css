@@ -421,5 +421,11 @@ template {
 .login-page {
   padding: 10% 42%; }
 
+#error {
+  margin: 0;
+  padding: 0;
+  color: red;
+  font-size: 15px; }
+
 body {
   background-color: #10101010; }

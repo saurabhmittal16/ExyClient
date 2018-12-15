@@ -1,8 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {Icon, Layout, Menu, Popover} from 'antd';
+import { Icon, Layout, Menu, Popover } from 'antd';
 
+import config from '../config';
 const {Content, Sider} = Layout;
 
 const sider = [
@@ -24,6 +26,12 @@ class Container extends React.Component {
             name: '',
             image: ''
         };
+    }
+
+    componentWillMount() {
+        axios.get(`${config.server_url}/api/sub-admin/`).then(
+            res => console.log(res)
+        );
     }
 
     onCollapse = (collapsed) => {

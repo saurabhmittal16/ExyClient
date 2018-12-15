@@ -1,19 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
 
 import { login } from '../actions/authAction';
 
 const FormItem = Form.Item;
 
 class Login extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            error: undefined
+        };
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                login(values);
+                const response = await login(values);
+                if (response.status === 200 && response.data.code === 2) {
+                    message.success("Login Successful");
+                    this.props.history.push('/');
+                }
+                else {
+                    this.setState({
+                        error: response.data.message
+                    });
+                }
             }
         });
     }
@@ -46,13 +63,18 @@ class Login extends React.Component {
                             )
                         }
                     </FormItem>
+                    
                     <FormItem>
                         <Link className="login-form-forgot" to='/forgot'>Forgot password</Link>
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Log in
                         </Button>
+                        <p id='error'>
+                            {!!this.state.error && this.state.error}
+                        </p>
                         Or <Link to='/signup'>register now</Link>
                     </FormItem>
+                    
                 </Form>
             </div>
         );
