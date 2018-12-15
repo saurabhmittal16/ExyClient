@@ -106,7 +106,6 @@ class Container extends React.Component {
                     </Sider>
                     <Content style={{margin: '20px 20px', overflow: 'scrollable'}}>
                         <h1>Content</h1>
-                        <p>{this.props.count}</p>
                     </Content>
                 </Layout>
             </Layout>
@@ -116,7 +115,7 @@ class Container extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        count: 0
+        isAuthenticated: state.auth.isAuthenticated
     }
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import RequireAuth from '../utils/requireAuth';
 import Login from './Login';
 import Container from './Container';
 
@@ -24,7 +25,7 @@ class App extends React.Component {
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} />
                     <Route exact path='/forgot' component={ForgotPassword} />
-                    <Route exact path='/' component={Container} />
+                    <Route exact path='/' component={RequireAuth(Container)} />
                     <Route exact path='*' component={NotFound} />
                 </Switch>
             </BrowserRouter>

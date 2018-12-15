@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, message } from 'antd';
 
-import { login } from '../actions/authAction';
+// Login Imports
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import setAuthHeaders from '../utils/setAuthHeaders';
+import config from '../config';
+import { setCurrentUser } from '../actions/authAction';
 
 const FormItem = Form.Item;
 
@@ -21,8 +26,13 @@ class Login extends React.Component {
         e.preventDefault();
         this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                const response = await login(values);
+                const response = await axios.post(`${config.server_url}/api/auth/admin/login`, values);
                 if (response.status === 200 && response.data.code === 2) {
+                    const token = response.data.token;
+                    const user = jwtDecode(token);
+                    localStorage.setItem('token', token);
+                    setAuthHeaders(token);
+                    this.props.dispatch(setCurrentUser(user));
                     message.success("Login Successful");
                     this.props.history.push('/');
                 }
