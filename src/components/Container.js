@@ -1,11 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Icon, Layout, Menu, Popover } from 'antd';
 import Router from './Router';
 
-import config from '../config';
 import { removeCurrentUser } from '../actions/authAction';
 
 const {Content, Sider} = Layout;
@@ -52,12 +50,6 @@ class Container extends React.Component {
             image: ''
         };
         this.logout = this.logout.bind(this);
-    }
-
-    componentWillMount() {
-        axios.get(`${config.server_url}/api/sub-admin/`).then(
-            res => console.log(res)
-        );
     }
 
     logout() {
@@ -138,20 +130,22 @@ class Container extends React.Component {
                                 )
                             )
                         }
-                            <hr style={{color: 'white', width: '70%'}} />
-                            <Link to='/survey/new'>
-                                <Icon 
-                                    style={{
-                                        borderRadius: '50%',
-                                        backgroundColor: '#60c2e6',
-                                        margin: '19px',
-                                        padding: '15px',
-                                        fontSize: '18px',
-                                        cursor: 'pointer'
-                                    }}
-                                    type='plus' 
-                                />
-                            </Link>
+                            <React.Fragment>
+                                <hr style={{color: 'white', width: '70%'}} />
+                                <Link to='/survey/new'>
+                                    <Icon 
+                                        style={{
+                                            borderRadius: '50%',
+                                            backgroundColor: '#60c2e6',
+                                            margin: '19px',
+                                            padding: '15px',
+                                            fontSize: '18px',
+                                            cursor: 'pointer'
+                                        }}
+                                        type='plus' 
+                                    />
+                                </Link>
+                            </React.Fragment>
                         </Menu>
                     </Sider>
                     <Content style={{overflow: 'scrollable'}}>
