@@ -1,9 +1,9 @@
 import React from 'react';
-import {Icon, Layout, Menu, Popover} from 'antd';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import {Icon, Layout, Menu, Popover} from 'antd';
 
 const {Content, Sider} = Layout;
-
 
 const sider = [
     ["dashboard", "/"],
@@ -98,6 +98,7 @@ class Container extends React.Component {
                     </Sider>
                     <Content style={{margin: '20px 20px', overflow: 'scrollable'}}>
                         <h1>Content</h1>
+                        <p>{this.props.count}</p>
                     </Content>
                 </Layout>
             </Layout>
@@ -105,4 +106,10 @@ class Container extends React.Component {
     }
 }
 
-export default Container;
+const mapStateToProps = (state) => {
+    return {
+        count: 0
+    }
+};
+
+export default connect(mapStateToProps)(Container);

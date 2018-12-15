@@ -405,4 +405,21 @@ template {
   padding: 7px 20px;
   display: flex;
   justify-content: space-between;
-  background-color: #0277bdcf; }
+  background-color: #0278bd; }
+
+.login-form {
+  min-width: 300px;
+  background-color: white;
+  padding: 20px; }
+
+.login-form-forgot {
+  float: right; }
+
+.login-form-button {
+  width: 100%; }
+
+.login-page {
+  padding: 10% 42%; }
+
+body {
+  background-color: #10101010; }
