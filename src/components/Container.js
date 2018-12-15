@@ -156,7 +156,7 @@ class Container extends React.Component {
                     </Sider>
                     <Content style={{overflow: 'scrollable'}}>
                         <NavBar />
-                        <div style={{margin: '20px 20px'}}>
+                        <div style={{margin: '40px 70px'}}>
                             <Router />
                         </div>
                     </Content>

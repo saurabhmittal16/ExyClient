@@ -313,7 +313,8 @@ template {
   .container_header .icons {
     margin-right: 10px;
     padding: 0 5px;
-    height: 40px; }
+    height: 40px;
+    float: right; }
     .container_header .icons i {
       font-size: 24px;
       height: 40px;
@@ -398,7 +399,8 @@ template {
 
 .ant-menu-horizontal > .ant-menu-item, .ant-menu-horizontal > .ant-menu-submenu {
   width: 20%;
-  text-align: center; }
+  text-align: center;
+  font-size: 17px; }
 
 .navbar > .ant-menu-item-active i {
   color: #1890ff; }
@@ -422,6 +424,16 @@ template {
   padding: 0;
   color: red;
   font-size: 15px; }
+
+.type_selection {
+  display: flex;
+  cursor: pointer;
+  font-size: 24px;
+  height: 160px;
+  margin: 0 6px;
+  box-shadow: 0 0px 1px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+  justify-content: center;
+  align-items: center; }
 
 body {
   background-color: #10101010; }
