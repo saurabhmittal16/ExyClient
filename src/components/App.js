@@ -25,7 +25,7 @@ class App extends React.Component {
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} />
                     <Route exact path='/forgot' component={ForgotPassword} />
-                    <Route exact path='/' component={RequireAuth(Container)} />
+                    <Route path='/' component={RequireAuth(Container)} />
                     <Route exact path='*' component={NotFound} />
                 </Switch>
             </BrowserRouter>

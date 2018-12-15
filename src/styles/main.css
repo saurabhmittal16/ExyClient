@@ -327,18 +327,6 @@ template {
     height: 40px;
     width: 40px;
     vertical-align: middle; }
-  .container_header .name {
-    font-size: 20px;
-    text-align: center;
-    line-height: 34px;
-    border: solid 2px grey;
-    padding: 0 5px;
-    margin: auto 5px;
-    height: 34px;
-    display: flex;
-    align-self: center; }
-    .container_header .name * {
-      color: black; }
 
 .text_logo {
   letter-spacing: 2px;
@@ -347,7 +335,8 @@ template {
   padding-left: 10px;
   padding-top: 5px;
   line-height: 32px;
-  font-family: 'Montserrat', sans-serif; }
+  font-family: 'Montserrat', sans-serif;
+  color: white; }
 
 .container_80 {
   padding: 30px;
@@ -406,6 +395,13 @@ template {
   display: flex;
   justify-content: space-between;
   background-color: #0278bd; }
+
+.ant-menu-horizontal > .ant-menu-item, .ant-menu-horizontal > .ant-menu-submenu {
+  width: 20%;
+  text-align: center; }
+
+.navbar > .ant-menu-item-active i {
+  color: #1890ff; }
 
 .login-form {
   min-width: 300px;

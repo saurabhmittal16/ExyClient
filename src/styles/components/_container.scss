@@ -31,22 +31,6 @@
         width: 40px;
         vertical-align: middle;
     }
-
-    .name {
-        font-size: 20px;
-        text-align: center;
-        line-height: 34px;
-        border: solid 2px grey;
-        padding: 0 5px;
-        margin: auto 5px;
-        height: 34px;
-        display: flex;
-        align-self: center;
-
-        * {
-            color: black;
-        }
-    }
 }
 
 .text_logo {
@@ -57,6 +41,7 @@
     padding-top: 5px;
     line-height: 32px;
     font-family: 'Montserrat', sans-serif;
+    color: white;
 }
 
 .container_80 {
@@ -137,4 +122,15 @@
     display: flex;
     justify-content: space-between;
     background-color: #0278bd;
+}
+
+.ant-menu-horizontal > .ant-menu-item, .ant-menu-horizontal > .ant-menu-submenu {
+    width: 20%;
+    text-align: center;
+}
+
+.navbar > .ant-menu-item-active {
+    i {
+        color: #1890ff;
+    }
 }

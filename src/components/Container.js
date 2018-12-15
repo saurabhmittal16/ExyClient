@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Icon, Layout, Menu, Popover, Divider } from 'antd';
+import { Icon, Layout, Menu, Popover } from 'antd';
+import Router from './Router';
 
 import config from '../config';
 import { removeCurrentUser } from '../actions/authAction';
@@ -14,6 +15,31 @@ const sider = [
     ["wifi", "/", "Surveys"],
     ["user", "/", "Profile"],
 ]
+
+const NavBar = () => (
+    <Menu
+        mode="horizontal"
+        className="navbar"
+    >
+        <Menu.Item key="1">
+            <Link to="/survey/new">
+                <Icon type="plus" />Create
+            </Link>
+        </Menu.Item>
+        <Menu.Item key="2">
+            <Icon type="loading-3-quarters" />Pending Approval
+        </Menu.Item>
+        <Menu.Item key="3">
+            <Icon type="file-done" />Ready To Publish
+        </Menu.Item>
+        <Menu.Item key="4">
+            <Icon type="rocket" />Published
+        </Menu.Item>
+        <Menu.Item key="5">
+            <Icon type="stop" />Discarded
+        </Menu.Item>
+    </Menu>
+);
 
 class Container extends React.Component {
 
@@ -113,21 +139,26 @@ class Container extends React.Component {
                             )
                         }
                             <hr style={{color: 'white', width: '70%'}} />
-                            <Icon 
-                                style={{
-                                    borderRadius: '50%',
-                                    backgroundColor: '#60c2e6',
-                                    margin: '19px',
-                                    padding: '15px',
-                                    fontSize: '18px',
-                                    cursor: 'pointer'
-                                }}
-                                type='plus' 
-                            />
+                            <Link to='/survey/new'>
+                                <Icon 
+                                    style={{
+                                        borderRadius: '50%',
+                                        backgroundColor: '#60c2e6',
+                                        margin: '19px',
+                                        padding: '15px',
+                                        fontSize: '18px',
+                                        cursor: 'pointer'
+                                    }}
+                                    type='plus' 
+                                />
+                            </Link>
                         </Menu>
                     </Sider>
-                    <Content style={{margin: '20px 20px', overflow: 'scrollable'}}>
-                        <h1>Content</h1>
+                    <Content style={{overflow: 'scrollable'}}>
+                        <NavBar />
+                        <div style={{margin: '20px 20px'}}>
+                            <Router />
+                        </div>
                     </Content>
                 </Layout>
             </Layout>
