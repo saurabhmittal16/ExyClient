@@ -3,13 +3,15 @@ import config from '../config';
 import { ADD_SURVEY, SET_ERRORS, CLEAR_ERRORS } from './types';
 
 const prepareRequestBody = (data, type) => {
-    let final_options = [];
-    for(let i=0; i<data.option_image.length; i++) {
-        let temp = {
-            option_text: data.option_text[i],
-            option_image: data.option_image[i]
-        };
-        final_options.push(temp);
+    let final_options = []; 
+    if (data.option) {
+        for(let i=0; i<data.option_image.length; i++) {
+            let temp = {
+                option_text: data.option_text[i],
+                option_image: data.option_image[i]
+            };
+            final_options.push(temp);
+        }
     }
     const body = {
         question: data.question,
@@ -21,6 +23,7 @@ const prepareRequestBody = (data, type) => {
         category: data.category,
         options: final_options
     }
+    console.log(body);  
     return body;
 }
 
@@ -39,10 +42,10 @@ export const addSurvey = (data, type) => {
             }
             return res;
         } catch (err) {
-            console.log("Caught", err);
+            console.log("Caught", err.response);
             dispatch({
                 type: SET_ERRORS,
-                patload: err.response
+                payload: err.response
             })
         }    
     }

@@ -1,10 +1,8 @@
 import React from 'react';
 import { Row, Col, Card } from 'antd';
 
-import SingleSelection from './SingleSelection';
-import MultipleSelection from './MultipleSelection';
-import Rating from './Rating';
-import Feedback from './Feedback';
+import Selection from './Selection';
+import RatingFeedback from './RatingFeedback';
 
 const types = [
     'Single Selection',
@@ -17,15 +15,15 @@ class NewSurvey extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: 1
+            selected: undefined
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.TypeForms = [
-            <SingleSelection onCancel={this.handleCancel}  {...this.props} />,
-            <MultipleSelection onCancel={this.handleCancel} {...this.props} />,
-            <Rating onCancel={this.handleCancel} {...this.props} />,
-            <Feedback onCancel={this.handleCancel} {...this.props} />
+            <Selection type='single' onCancel={this.handleCancel}  {...this.props} />,
+            <Selection type='multiple' onCancel={this.handleCancel} {...this.props} />,
+            <RatingFeedback type='rating' onCancel={this.handleCancel} {...this.props} />,
+            <RatingFeedback type='feedback' onCancel={this.handleCancel} {...this.props} />
         ]
     }
 

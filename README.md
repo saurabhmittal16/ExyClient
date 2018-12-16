@@ -13,5 +13,6 @@ Axios
 ## Authentication using Tokens  
 
 ## To Do -
-1) Provide approval policy option according to privilege
-2) Fetch album list
+- [ ] Provide approval policy option according to privilege
+- [ ] Fetch album list  
+- [ ] Start date should be before end and after current

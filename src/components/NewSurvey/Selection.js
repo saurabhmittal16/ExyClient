@@ -62,7 +62,7 @@ class SingleSelection extends React.Component {
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
                 try {
-                    const res = await this.props.addSurvey(values, 'single');
+                    await this.props.addSurvey(values, this.props.type);
                     notification.open({
                         message: 'Survey added',
                         description: 'A new survey was added',
