@@ -1,6 +1,8 @@
 import React from 'react';
-import { Form, Input, Row, Col, Button, Card, Select, DatePicker, Radio, Icon } from 'antd';
+import { connect } from 'react-redux';
+import { Form, Input, Row, Col, Button, Card, Select, DatePicker, Radio, Icon, notification } from 'antd';
 
+import { addSurvey } from '../../actions/surveyActions';
 import categories from '../../categories';
 
 const FormItem = Form.Item;
@@ -57,9 +59,18 @@ class SingleSelection extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
+        this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                try {
+                    const res = await this.props.addSurvey(values, 'single');
+                    notification.open({
+                        message: 'Survey added',
+                        description: 'A new survey was added',
+                    });
+                    this.props.history.push('/');
+                } catch (err) {
+                    console.log(err);
+                }
             }
         });
     }
@@ -331,7 +342,7 @@ class SingleSelection extends React.Component {
                 <Col 
                     span={6}
                 >
-                    <p
+                    <div
                         style={{
                             margin: '30px'
                         }}
@@ -342,7 +353,7 @@ class SingleSelection extends React.Component {
                                 <p>Hello</p>
                             </div>
                         </div>
-                    </p>
+                    </div>
                 </Col>
             </Row>
         );
@@ -350,4 +361,5 @@ class SingleSelection extends React.Component {
 }
 
 const WrappedSingleSelection = Form.create()(SingleSelection);
-export default WrappedSingleSelection;
+
+export default connect(null, { addSurvey })(WrappedSingleSelection);

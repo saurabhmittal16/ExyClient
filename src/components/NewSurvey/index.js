@@ -17,15 +17,15 @@ class NewSurvey extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: undefined
+            selected: 1
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.TypeForms = [
-            <SingleSelection onCancel={this.handleCancel}/>,
-            <MultipleSelection onCancel={this.handleCancel}/>,
-            <Rating onCancel={this.handleCancel}/>,
-            <Feedback onCancel={this.handleCancel}/>
+            <SingleSelection onCancel={this.handleCancel}  {...this.props} />,
+            <MultipleSelection onCancel={this.handleCancel} {...this.props} />,
+            <Rating onCancel={this.handleCancel} {...this.props} />,
+            <Feedback onCancel={this.handleCancel} {...this.props} />
         ]
     }
 

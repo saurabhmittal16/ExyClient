@@ -2,3 +2,8 @@ export const INCREMENT = 'INCREMENT';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
+
+export const ADD_SURVEY = 'ADD_SURVEY';
+
+export const SET_ERRORS = 'SET_ERRORS';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';

@@ -10,4 +10,8 @@ Redux
 AntD  
 Axios  
 
-## Authentication using Tokens
+## Authentication using Tokens  
+
+## To Do -
+1) Provide approval policy option according to privilege
+2) Fetch album list
