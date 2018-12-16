@@ -26,3 +26,33 @@
     cursor: not-allowed;
     opacity: 0.5;
 }
+
+.mobile {
+
+    width: 253px;
+    height: 500px;
+    margin: 0px auto;
+    position: relative;
+    background-image: url(/phone.png);
+    background-size: cover;
+
+    .screen {
+        position: absolute;
+        top: 39.7586px;
+        left: 13.4828px;
+        width: 227.034px;
+        height: 404px;
+        background-color: white;
+    }
+
+    .content {
+        position: absolute;
+        top: 39.7586px;
+        left: 13.4828px;
+        width: 227.034px;
+        height: 404px;
+        transform: scale(1, 1);
+        transform-origin: 0px 0px 0px;
+        display: flex;
+    }
+}

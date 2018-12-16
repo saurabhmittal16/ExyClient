@@ -17,7 +17,7 @@ class NewSurvey extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: 1
+            selected: undefined
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleCancel = this.handleCancel.bind(this);

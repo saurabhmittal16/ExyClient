@@ -336,7 +336,12 @@ class SingleSelection extends React.Component {
                             margin: '30px'
                         }}
                     >
-                        Mobile preview
+                        <div className="mobile">
+                            <div className="screen" /> 
+                            <div className="content">
+                                <p>Hello</p>
+                            </div>
+                        </div>
                     </p>
                 </Col>
             </Row>
