@@ -91,7 +91,7 @@ class Container extends React.Component {
                                 }
                             >
                                 <img 
-                                    src="https://cdn2.iconfinder.com/data/icons/social-media-8/512/Chrome.png" 
+                                    src="https://cdn2.iconfinder.com/data/icons/social-media-8/512/Chrome.png"
                                     className="photo__avatar" 
                                     style={{cursor: 'pointer'}}
                                     alt="logo"

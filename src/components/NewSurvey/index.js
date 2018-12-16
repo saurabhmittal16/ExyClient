@@ -5,7 +5,6 @@ import SingleSelection from './SingleSelection';
 import MultipleSelection from './MultipleSelection';
 import Rating from './Rating';
 import Feedback from './Feedback';
-import { Button } from 'antd/lib/radio';
 
 const types = [
     'Single Selection',
@@ -14,21 +13,23 @@ const types = [
     'Feedback'
 ];
 
-const TypeForms = [
-    <SingleSelection />,
-    <MultipleSelection />,
-    <Rating />,
-    <Feedback />
-]
-
 class NewSurvey extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: undefined
+            selected: 1
         }
         this.handleClick = this.handleClick.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
+        this.TypeForms = [
+            <SingleSelection onCancel={this.handleCancel}/>,
+            <MultipleSelection onCancel={this.handleCancel}/>,
+            <Rating onCancel={this.handleCancel}/>,
+            <Feedback onCancel={this.handleCancel}/>
+        ]
     }
+
+    handleCancel = () => this.setState({selected: undefined});
 
     handleClick = (index) => {
         this.setState({selected: index+1});
@@ -57,10 +58,7 @@ class NewSurvey extends React.Component {
                         </Row>
                     ) : (
                         <div>
-                            {TypeForms[this.state.selected - 1]}
-                            <Button onClick={() => this.setState({selected: undefined})}>
-                                Back
-                            </Button>
+                            {this.TypeForms[this.state.selected - 1]}
                         </div>
                     )
                 }

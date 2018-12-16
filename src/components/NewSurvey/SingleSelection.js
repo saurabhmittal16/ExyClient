@@ -1,11 +1,348 @@
 import React from 'react';
+import { Form, Input, Row, Col, Button, Card, Select, DatePicker, Radio, Icon } from 'antd';
+
+import categories from '../../categories';
+
+const FormItem = Form.Item;
+const Option = Select.Option
+const RadioGroup = Radio.Group;
+let id = 2;
+
+const ImagePlaceholder = () => (
+    <div
+        style={{
+            width: '170px',
+            height: '170px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: '5% 25%',
+            border: 'dashed 1px #101010'
+        }}
+    >
+        Placeholder
+    </div>
+);
 
 class SingleSelection extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.add = this.add.bind(this);
+        this.remove = this.remove.bind(this);
+    }
+
+    remove = (k) => {
+        const { form } = this.props;
+        const options = form.getFieldValue('options');
+
+        if (options.length === 2) {
+          return;
+        }
+    
+        form.setFieldsValue({
+            options: options.filter(key => key !== k),
+        });
+    }
+    
+    add = () => {
+        const { form } = this.props;
+        const options = form.getFieldValue('options');
+        const nextoptions = options.concat(++id);
+        form.setFieldsValue({
+            options: nextoptions,
+        });
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    }
+      
     render() {
+        const { getFieldDecorator, getFieldValue } = this.props.form;
+    
+        getFieldDecorator('options', { initialValue: [0,1] });
+    
+        const options = getFieldValue('options');
+        const formItems = options.map((k, index) => (
+            <div 
+                key={index} 
+                style={{display: 'flex', justifyContent: 'space-between'}}
+            >
+                    <FormItem
+                        required={true}
+                        key={k*100 + 1}
+                        style={{width: '30%'}}
+                    >
+                        {
+                            getFieldDecorator(`option_image[${k}]`, {
+                                validateTrigger: ['onChange', 'onBlur'],
+                                rules: [{
+                                    required: true,
+                                    message: "Upload an image"
+                                }],
+                            })(
+                                <Input name='text' style={{ width: '90%', marginRight: 8 }} />
+                            )
+                        }
+                    </FormItem>
+                    <FormItem
+                        required={true}
+                        key={k}
+                        style={{width: '70%'}}
+                    >
+                        {
+                            getFieldDecorator(`option_text[${k}]`, {
+                                validateTrigger: ['onChange', 'onBlur'],
+                                rules: [{
+                                    required: true,
+                                    message: "Enter text"
+                                }],
+                            })(
+                                <Input name='text' style={{ width: '90%', marginRight: 8 }} />
+                            )
+                        }
+                        {
+                            options.length > 2 ? (
+                                <Icon
+                                    className="dynamic-delete-button"
+                                    type="minus-circle-o"
+                                    disabled={options.length === 2}
+                                    onClick={() => this.remove(k)}
+                                />
+                            ) : null
+                        }
+                    </FormItem>
+            </div>
+        ));
+
         return (
-            <h1>Single Selection</h1>
+            <Row>
+                <Col span={18}>
+                    <Card>
+                        <Button 
+                            onClick={this.props.onCancel}
+                            icon='cross'
+                            style={{
+                                float: 'right',
+                                position: 'relative',
+                                zIndex: '99',
+                                border: 'none'
+                            }}
+                        />
+                        <Form
+                            onSubmit={this.handleSubmit}
+                        >
+                            <Row>
+                                <Col span={16}>
+                                    <Row>
+                                        <Col span={10}>
+                                            <FormItem
+                                                label="Album"
+                                            >
+                                            {
+                                                getFieldDecorator('album', {
+                                                    rules: [
+                                                        { required: true, message: 'Please select an Album' }
+                                                    ],
+                                                })(
+                                                    <Select placeholder="Select an Album">
+                                                        <Option value="red">Red</Option>
+                                                        <Option value="green">Green</Option>
+                                                        <Option value="blue">Blue</Option>
+                                                    </Select>
+                                                )
+                                            }
+                                            </FormItem> 
+                                        </Col>
+                                    </Row>
+                                    
+                                    <Row>
+                                        <FormItem
+                                            label="Question"
+                                        >
+                                        {
+                                            getFieldDecorator('question', {
+                                                rules: [
+                                                    { required: true, message: 'Please enter the question' }
+                                                ],
+                                            })(
+                                                <Input />
+                                            )
+                                        }
+                                        </FormItem>
+                                    </Row>
+                                    
+                                    <Row>
+                                        <FormItem
+                                            label="Image"
+                                        >
+                                        {
+                                            getFieldDecorator('image', {
+                                                rules: [
+                                                    { required: true, message: 'Please enter image link' }
+                                                ],
+                                            })(
+                                                <Input />
+                                            )
+                                        }
+                                        </FormItem>
+                                    </Row>
+
+                                    <Row>
+                                        <FormItem
+                                            label="Options"
+                                        >
+                                            <Col span={21}>
+                                                {formItems}
+                                            </Col>
+                                            <Col 
+                                                span={3}
+                                            >
+                                                <Icon 
+                                                    style={{cursor: 'pointer', margin: '50%', fontSize: '20px'}}
+                                                    type="plus"
+                                                    onClick={this.add}
+                                                />
+                                            </Col>
+                                        </FormItem>
+                                    </Row>
+
+                                    <Row>
+                                        <Col span={12}>
+                                            <FormItem
+                                                label="Start Date"
+                                            >
+                                            {
+                                                getFieldDecorator('start', {
+                                                    rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+                                                })(
+                                                    <DatePicker showTime format="DD-MM-YYYY HH:mm:ss" />
+                                                )
+                                            }
+                                            </FormItem>
+                                        </Col>
+
+                                        <Col span={12}>
+                                            <FormItem
+                                                label="End Date"
+                                            >
+                                            {
+                                                getFieldDecorator('end', {
+                                                    rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+                                                })(
+                                                    <DatePicker showTime format="DD-MM-YYYY HH:mm:ss" />
+                                                )
+                                            }
+                                            </FormItem>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col span={10}>
+                                            <FormItem
+                                                label="Approval Policy"
+                                            >
+                                            {
+                                                getFieldDecorator('approval', {
+                                                    rules: [
+                                                        { required: true, message: 'Please select approval policy' }
+                                                    ],
+                                                })(
+                                                    <Select placeholder="Approval Policy">
+                                                        <Option value="red">Red</Option>
+                                                        <Option value="green">Green</Option>
+                                                        <Option value="blue">Blue</Option>
+                                                    </Select>
+                                                )
+                                            }
+                                            </FormItem> 
+                                        </Col>
+
+                                        <Col offset={2} span={10}>
+                                            <FormItem
+                                                label="Result Policy"
+                                            >
+                                            {
+                                                getFieldDecorator('result', {
+                                                    rules: [
+                                                        { required: true, message: 'Please select result policy' }
+                                                    ],
+                                                })(
+                                                    <Select placeholder="Result Policy">
+                                                        <Option value="red">Red</Option>
+                                                        <Option value="green">Green</Option>
+                                                        <Option value="blue">Blue</Option>
+                                                    </Select>
+                                                )
+                                            }
+                                            </FormItem> 
+                                        </Col>
+                                    </Row>
+                                </Col>
+
+                                <Col span={8}>
+                                    <ImagePlaceholder />
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <FormItem
+                                    label="Select a Category"
+                                >
+                                {
+                                    getFieldDecorator('category')(
+                                        <RadioGroup
+                                            style={{width: '100%'}}
+                                        >
+                                            <Row>
+                                            {
+                                                categories.map(
+                                                    (item, index) => (
+                                                        <Col span={8} key={index}>
+                                                            <Radio value={item}>
+                                                                {item}
+                                                            </Radio>
+                                                        </Col>
+                                                    )
+                                                )
+                                            }
+                                            </Row>
+                                        </RadioGroup>
+                                    )
+                                }
+                                </FormItem>
+                            </Row>
+
+                            <FormItem>
+                                <Button type="primary" htmlType="submit">Submit</Button>
+                            </FormItem>
+
+                        </Form>
+                    </Card>
+                </Col>
+
+                <Col 
+                    span={6}
+                >
+                    <p
+                        style={{
+                            margin: '30px'
+                        }}
+                    >
+                        Mobile preview
+                    </p>
+                </Col>
+            </Row>
         );
     }
 }
 
-export default SingleSelection;
+const WrappedSingleSelection = Form.create()(SingleSelection);
+export default WrappedSingleSelection;
