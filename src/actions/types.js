@@ -2,6 +2,9 @@ export const INCREMENT = 'INCREMENT';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
+export const USER_LOADING = 'USER_LOADING';
+
+export const GET_USER_DETAILS = 'GET_USER_DETAILS';
 
 export const ADD_SURVEY = 'ADD_SURVEY';
 

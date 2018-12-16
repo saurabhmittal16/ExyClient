@@ -476,3 +476,12 @@ template {
 
 body {
   background-color: #10101010; }
+
+.loading {
+  height: 60vh;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .loading i {
+    font-size: 72px; }

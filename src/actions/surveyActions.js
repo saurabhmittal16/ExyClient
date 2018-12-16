@@ -34,7 +34,9 @@ export const addSurvey = (data, type) => {
         try {
             const res = await axios.post(`${config.server_url}/api/survey`, body);
             if (res.status === 200) {
-                dispatch(clearErrors());
+                dispatch({
+                    type: CLEAR_ERRORS,
+                });
                 dispatch({
                     type: ADD_SURVEY,
                     payload: res.data 
@@ -46,14 +48,7 @@ export const addSurvey = (data, type) => {
             dispatch({
                 type: SET_ERRORS,
                 payload: err.response
-            })
+            });
         }    
-    }
-};
-
-// Clear Errors
-export const clearErrors = () => {
-    return {
-        type: CLEAR_ERRORS,
     }
 };

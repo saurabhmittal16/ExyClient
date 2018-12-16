@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { Icon, Layout, Menu, Popover } from 'antd';
 import Router from './Router';
 
-import { removeCurrentUser } from '../actions/authAction';
+import { getUserDetails, logout } from '../actions/authAction';
 
 const {Content, Sider} = Layout;
 const sider = [
     ["dashboard", "/", "Dashboard"],
-    ["file-done", "/", "Albums"],
+    ["file-done", "/albums", "Albums"],
     ["wifi", "/", "Surveys"],
     ["user", "/", "Profile"],
 ]
@@ -52,9 +52,13 @@ class Container extends React.Component {
         this.logout = this.logout.bind(this);
     }
 
+    async componentWillMount() {
+        await this.props.getUserDetails()
+    }
+
     logout() {
+        this.props.logout();
         localStorage.clear();
-        this.props.dispatch(removeCurrentUser());
     }
 
     onCollapse = (collapsed) => {
@@ -162,8 +166,8 @@ class Container extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated,
     }
 };
 
-export default connect(mapStateToProps)(Container);
+export default connect(mapStateToProps, {getUserDetails, logout})(Container);
