@@ -52,8 +52,8 @@ class Container extends React.Component {
         this.logout = this.logout.bind(this);
     }
 
-    async componentWillMount() {
-        await this.props.getUserDetails()
+    componentWillMount() {
+        this.props.getUserDetails().catch(err => console.log(err));
     }
 
     logout() {

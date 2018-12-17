@@ -485,3 +485,9 @@ body {
   align-items: center; }
   .loading i {
     font-size: 72px; }
+
+.page_title {
+  font-weight: 600;
+  font-size: 36px;
+  padding: 0 10px;
+  margin: 7px 0; }

@@ -57,6 +57,22 @@ class SingleSelection extends React.Component {
         });
     }
 
+    disabledStartDate = (startValue) => {
+        const endValue = this.props.form.getFieldsValue()['end'];
+        if (!startValue || !endValue) {
+          return false;
+        }
+        return startValue.valueOf() > endValue.valueOf();
+    }
+    
+    disabledEndDate = (endValue) => {
+        const startValue = this.props.form.getFieldsValue()['start'];
+        if (!endValue || !startValue) {
+            return false;
+        }
+        return endValue.valueOf() <= startValue.valueOf();
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
@@ -234,7 +250,11 @@ class SingleSelection extends React.Component {
                                                 getFieldDecorator('start', {
                                                     rules: [{ type: 'object', required: true, message: 'Please select time!' }],
                                                 })(
-                                                    <DatePicker showTime format="DD-MM-YYYY HH:mm:ss" />
+                                                    <DatePicker 
+                                                        showTime 
+                                                        format="DD-MM-YYYY HH:mm:ss" 
+                                                        disabledDate={this.disabledStartDate}
+                                                    />
                                                 )
                                             }
                                             </FormItem>
@@ -248,7 +268,11 @@ class SingleSelection extends React.Component {
                                                 getFieldDecorator('end', {
                                                     rules: [{ type: 'object', required: true, message: 'Please select time!' }],
                                                 })(
-                                                    <DatePicker showTime format="DD-MM-YYYY HH:mm:ss" />
+                                                    <DatePicker 
+                                                        showTime 
+                                                        format="DD-MM-YYYY HH:mm:ss" 
+                                                        disabledDate={this.disabledEndDate}
+                                                    />
                                                 )
                                             }
                                             </FormItem>
@@ -362,4 +386,8 @@ class SingleSelection extends React.Component {
 
 const WrappedSingleSelection = Form.create()(SingleSelection);
 
-export default connect(null, { addSurvey })(WrappedSingleSelection);
+const mapStateToProps = state => ({
+    user: state.auth.user
+});
+
+export default connect(mapStateToProps, { addSurvey })(WrappedSingleSelection);

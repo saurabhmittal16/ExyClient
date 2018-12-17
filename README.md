@@ -14,5 +14,5 @@ Axios
 
 ## To Do -
 - [ ] Provide approval policy option according to privilege
-- [ ] Fetch album list  
-- [ ] Start date should be before end and after current
+- [x] ~~Fetch album list~~  
+- [x] ~~Start date should be before end and after current~~

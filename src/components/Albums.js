@@ -13,7 +13,7 @@ class Albums extends React.Component {
                 {
                     !!this.props.user.albums ? (
                         <Row>
-                            <h1>Albums</h1>
+                            <h1 className='page_title'>Albums</h1>
                             {
                                 this.props.user.albums.map(
                                     (item, index) => (

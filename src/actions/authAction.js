@@ -4,9 +4,11 @@ import { SET_CURRENT_USER, REMOVE_CURRENT_USER, GET_USER_DETAILS, SET_ERRORS, CL
 
 // Get User details
 export const getUserDetails = () => {
+    console.log("Fetching user details");
     return async dispatch => {
         try {
             const res = await axios.get(`${config.server_url}/api/admin/details`);
+            console.log("User details fetched", res.data);
             if (res.status === 200) {
                 dispatch({
                     type: CLEAR_ERRORS
