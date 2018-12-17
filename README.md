@@ -16,3 +16,4 @@ Axios
 - [ ] Provide approval policy option according to privilege
 - [x] ~~Fetch album list~~  
 - [x] ~~Start date should be before end and after current~~
+- [ ] 404 and Nothing found component

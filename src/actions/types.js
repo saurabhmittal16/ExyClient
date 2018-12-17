@@ -10,3 +10,5 @@ export const ADD_SURVEY = 'ADD_SURVEY';
 
 export const SET_ERRORS = 'SET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
+export const SET_SUB_USERS = 'SET_SUB_USERS';

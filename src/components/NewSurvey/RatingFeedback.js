@@ -291,7 +291,7 @@ class SingleSelection extends React.Component {
 const WrappedSingleSelection = Form.create()(SingleSelection);
 
 const mapStateToProps = state => ({
-    user: state.auth.user
+    user: state.user.details
 });
 
 export default connect(mapStateToProps, { addSurvey })(WrappedSingleSelection);

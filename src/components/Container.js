@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { Icon, Layout, Menu, Popover } from 'antd';
 import Router from './Router';
 
-import { getUserDetails, logout } from '../actions/authAction';
+import { logout } from '../actions/authAction';
+import { getUserDetails } from '../actions/userActions';
 
 const {Content, Sider} = Layout;
 const sider = [
     ["dashboard", "/", "Dashboard"],
     ["file-done", "/albums", "Albums"],
     ["wifi", "/", "Surveys"],
-    ["user", "/", "Profile"],
 ]
 
 const NavBar = () => (
@@ -134,6 +134,20 @@ class Container extends React.Component {
                                 )
                             )
                         }
+                        
+                        {
+                            this.props.isAdmin ? (
+                                <Menu.Item 
+                                    key={4}
+                                    title="Sub Users"
+                                >
+                                    <Link to='/subusers'>
+                                        <Icon type='user' theme="outlined" />
+                                    </Link>
+                                </Menu.Item> 
+                            ) : <div />
+                        }
+
                             <React.Fragment>
                                 <hr style={{color: 'white', width: '70%'}} />
                                 <Link to='/survey/new'>
@@ -167,6 +181,7 @@ class Container extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.isAuthenticated,
+        isAdmin: state.auth.isAdmin
     }
 };
 

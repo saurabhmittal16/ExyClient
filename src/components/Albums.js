@@ -11,9 +11,8 @@ class Albums extends React.Component {
         return (
             <div>
                 {
-                    !!this.props.user.albums ? (
+                    this.props.user && !!this.props.user.albums ? (
                         <Row>
-                            <h1 className='page_title'>Albums</h1>
                             {
                                 this.props.user.albums.map(
                                     (item, index) => (
@@ -60,7 +59,7 @@ class Albums extends React.Component {
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.isAuthenticated,
-        user: state.auth.user    
+        user: state.user.details    
     }
 }
 

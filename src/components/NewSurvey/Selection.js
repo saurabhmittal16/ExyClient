@@ -180,9 +180,11 @@ class SingleSelection extends React.Component {
                                                     ],
                                                 })(
                                                     <Select placeholder="Select an Album">
-                                                        <Option value="red">Red</Option>
-                                                        <Option value="green">Green</Option>
-                                                        <Option value="blue">Blue</Option>
+                                                    {
+                                                        this.props.user.albums && this.props.user.albums.map(
+                                                            (item, index) => <Option key={index} value={item.text}>{item.text}</Option>
+                                                        )
+                                                    }
                                                     </Select>
                                                 )
                                             }
@@ -387,7 +389,7 @@ class SingleSelection extends React.Component {
 const WrappedSingleSelection = Form.create()(SingleSelection);
 
 const mapStateToProps = state => ({
-    user: state.auth.user
+    user: state.user.details
 });
 
 export default connect(mapStateToProps, { addSurvey })(WrappedSingleSelection);
