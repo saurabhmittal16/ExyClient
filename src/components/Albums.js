@@ -7,7 +7,7 @@ const { Meta } = Card;
 
 class Albums extends React.Component {
     componentWillMount() {
-        console.log("Remounting Albums");
+        // console.log("Mounting Albums");
     }
 
     render() {

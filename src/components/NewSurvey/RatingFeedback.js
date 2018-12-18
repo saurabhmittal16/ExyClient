@@ -25,11 +25,47 @@ const ImagePlaceholder = () => (
     </div>
 );
 
-class SingleSelection extends React.Component {
+const prepareApprovalSelection = (isAdmin, canApprove) => {
+
+    if (isAdmin) {
+        // Admin has pre approved
+        return (
+            <Select placeholder="Approval Policy" disabled>
+                <Option value="pre">Pre-Approval</Option>
+            </Select>
+        )
+    } else if (canApprove) {
+        // Is not admin but can approve
+        return (
+            <Select placeholder="Approval Policy">
+                <Option value="pre">Pre-Approval</Option>
+                <Option value="submit">Submit from Approval</Option>
+            </Select>
+        );
+    } else {
+        // Can't approve
+        return (
+            <Select placeholder="Approval Policy" disabled>
+                <Option value="submit">Submit for Approval</Option>
+            </Select>
+        )
+    }
+}
+
+class RatingFeedback extends React.Component {
 
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        const {isAdmin, user, form} = this.props;
+        if (isAdmin) {
+            form.setFieldsValue({'approval': 'pre'});
+        } else if (!user.canApprove) {
+            form.setFieldsValue({'approval': 'submit'});
+        } 
     }
 
     disabledStartDate = (startValue) => {
@@ -67,6 +103,7 @@ class SingleSelection extends React.Component {
     }
       
     render() {
+        console.log(this.props.user, this.props.isAdmin);
         const { getFieldDecorator } = this.props.form;
     
         return (
@@ -194,10 +231,7 @@ class SingleSelection extends React.Component {
                                                         { required: true, message: 'Please select approval policy' }
                                                     ],
                                                 })(
-                                                    <Select placeholder="Approval Policy">
-                                                        <Option value="pre">Pre-Approval</Option>
-                                                        <Option value="done">Submit For Approval</Option>
-                                                    </Select>
+                                                    prepareApprovalSelection(this.props.isAdmin, this.props.user.canApprove)
                                                 )
                                             }
                                             </FormItem> 
@@ -287,10 +321,11 @@ class SingleSelection extends React.Component {
     }
 }
 
-const WrappedSingleSelection = Form.create()(SingleSelection);
+const WrappedSingleSelection = Form.create()(RatingFeedback);
 
 const mapStateToProps = state => ({
-    user: state.user.details
+    user: state.user.details,
+    isAdmin: state.auth.isAdmin
 });
 
 export default connect(mapStateToProps, { addSurvey })(WrappedSingleSelection);

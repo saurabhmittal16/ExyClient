@@ -53,7 +53,7 @@ class Container extends React.Component {
     }
 
     componentWillMount() {
-        console.log("Remounting Container");
+        // console.log("Mounting Container");
         this.props.getUserDetails();
     }
 
@@ -150,7 +150,7 @@ class Container extends React.Component {
                                         <Icon type='user' theme="outlined" />
                                     </Link>
                                 </Menu.Item> 
-                            ) : <div />
+                            ) : null
                         }
 
                             <React.Fragment>
