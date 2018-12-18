@@ -53,7 +53,8 @@ class Container extends React.Component {
     }
 
     componentWillMount() {
-        this.props.getUserDetails().catch(err => console.log(err));
+        console.log("Remounting Container");
+        this.props.getUserDetails();
     }
 
     logout() {
@@ -74,7 +75,6 @@ class Container extends React.Component {
     }
 
     render() {
-        
         return (
             <Layout className={'admin-panel'} style={{minHeight: '100vh'}}>
                 <div className='admin_header'>
@@ -89,8 +89,13 @@ class Container extends React.Component {
                                 style={{padding: 0}}
                                 trigger={['click']}
                                 content={
-                                    <div style={{cursor: 'pointer'}} onClick={this.logout}>
-                                        Logout
+                                    <div>
+                                        <div style={{cursor: 'pointer'}} onClick={this.logout}>
+                                            Logout
+                                        </div>
+                                        <div>
+                                            {this.props.email}
+                                        </div>
                                     </div>
                                 }
                             >
@@ -180,6 +185,7 @@ class Container extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        email: state.auth.user.email,
         isAuthenticated: state.auth.isAuthenticated,
         isAdmin: state.auth.isAdmin
     }

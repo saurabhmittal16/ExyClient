@@ -1,4 +1,4 @@
-import { GET_USER_DETAILS, SET_SUB_USERS } from '../actions/types';
+import { SET_USER_DETAILS, SET_SUB_USERS } from '../actions/types';
 
 const initialState = {
     details: {},
@@ -7,7 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case GET_USER_DETAILS:
+        case SET_USER_DETAILS:
             return {
                 details: action.payload
             }

@@ -3,12 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, message } from 'antd';
 
-// Login Imports
-import axios from 'axios';
-import jwtDecode from 'jwt-decode';
-import setAuthHeaders from '../utils/setAuthHeaders';
-import config from '../config';
-import { setCurrentUser } from '../actions/authAction';
+import { login } from '../actions/authAction';
+import { getUserDetails } from '../actions/userActions';
 
 const FormItem = Form.Item;
 
@@ -26,20 +22,23 @@ class Login extends React.Component {
         e.preventDefault();
         this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                const response = await axios.post(`${config.server_url}/api/auth/admin/login`, values);
-                if (response.status === 200 && response.data.code === 2) {
-                    const token = response.data.token;
-                    const user = jwtDecode(token);
-                    localStorage.setItem('token', token);
-                    setAuthHeaders(token);
-                    this.props.dispatch(setCurrentUser(user));
-                    message.success("Login Successful");
-                    this.props.history.push('/');
-                }
-                else {
-                    this.setState({
-                        error: response.data.message
-                    });
+                try {
+                    const res = await this.props.login(values);
+                    // console.log(res);
+                    if (res.status === 200 && res.data.code === 2) {
+                        message.success("Login Successful");
+                        this.props.history.push('/');
+                    } else if (res.status === 200) {
+                        this.setState({
+                            error: res.data.message
+                        });
+                    } else {
+                        this.setState({
+                            error: 'Internal server error'
+                        });
+                    }
+                } catch (err) {
+                    console.log("Internal server error");
                 }
             }
         });
@@ -57,7 +56,10 @@ class Login extends React.Component {
                     <FormItem>
                         {
                             getFieldDecorator('email', {
-                                rules: [{ required: true, message: 'Please input your email!' }],
+                                rules: [
+                                    { required: true, message: 'Please input your email!' },
+                                    { type: 'email', message: 'Please enter a valid email' }
+                                ],
                             })(
                                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
                             )
@@ -92,4 +94,4 @@ class Login extends React.Component {
 }
 const WrappedLogin = Form.create()(Login);
 
-export default connect()(WrappedLogin);
+export default connect(null, { getUserDetails, login })(WrappedLogin);

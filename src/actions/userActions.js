@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../config';
-import { GET_USER_DETAILS, SET_SUB_USERS, SET_ERRORS, CLEAR_ERRORS } from './types';
+import { SET_USER_DETAILS, SET_SUB_USERS, SET_ERRORS, CLEAR_ERRORS } from './types';
 
 // Get User details
 export const getUserDetails = () => {
@@ -14,7 +14,7 @@ export const getUserDetails = () => {
                     type: CLEAR_ERRORS
                 });
                 dispatch({
-                    type: GET_USER_DETAILS,
+                    type: SET_USER_DETAILS,
                     payload: res.data
                 });
             }

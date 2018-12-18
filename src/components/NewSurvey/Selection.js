@@ -293,9 +293,8 @@ class SingleSelection extends React.Component {
                                                     ],
                                                 })(
                                                     <Select placeholder="Approval Policy">
-                                                        <Option value="red">Red</Option>
-                                                        <Option value="green">Green</Option>
-                                                        <Option value="blue">Blue</Option>
+                                                        <Option value="pre">Pre-Approval</Option>
+                                                        <Option value="done">Submit For Approval</Option>
                                                     </Select>
                                                 )
                                             }

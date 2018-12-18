@@ -6,8 +6,11 @@ import Loading from './Loading';
 const { Meta } = Card;
 
 class Albums extends React.Component {
+    componentWillMount() {
+        console.log("Remounting Albums");
+    }
+
     render() {
-        console.log(this.props);
         return (
             <div>
                 {
