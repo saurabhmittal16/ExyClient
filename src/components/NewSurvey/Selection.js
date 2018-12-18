@@ -8,7 +8,7 @@ import categories from '../../categories';
 const FormItem = Form.Item;
 const Option = Select.Option
 const RadioGroup = Radio.Group;
-let id = 2;
+let id = 1;
 
 const ImagePlaceholder = () => (
     <div
@@ -98,13 +98,30 @@ class SingleSelection extends React.Component {
         if (!startValue || !endValue) {
           return false;
         }
-        return startValue.valueOf() > endValue.valueOf();
+
+        if (startValue.valueOf() > endValue.valueOf()) {
+            // disable if start is greater than end
+            return true;
+        }
+
+        const now = new Date();
+        console.log(now);
+        if (startValue.valueOf() > now.valueOf()) {
+            // disable if start is before current time date
+            return true;
+        }
+        return false;
     }
     
     disabledEndDate = (endValue) => {
         const startValue = this.props.form.getFieldsValue()['start'];
         if (!endValue || !startValue) {
             return false;
+        }
+        const now = new Date();
+        console.log(now);        
+        if (endValue.valueOf() > now.valueOf()) {
+            return true;
         }
         return endValue.valueOf() <= startValue.valueOf();
     }

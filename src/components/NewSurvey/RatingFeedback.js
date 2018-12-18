@@ -103,7 +103,6 @@ class RatingFeedback extends React.Component {
     }
       
     render() {
-        console.log(this.props.user, this.props.isAdmin);
         const { getFieldDecorator } = this.props.form;
     
         return (

@@ -4,7 +4,7 @@ import { ADD_SURVEY, SET_ERRORS, CLEAR_ERRORS } from './types';
 
 const prepareRequestBody = (data, type) => {
     let final_options = []; 
-    if (data.option) {
+    if (data.options) {
         for(let i=0; i<data.option_image.length; i++) {
             let temp = {
                 option_text: data.option_text[i],
@@ -19,9 +19,11 @@ const prepareRequestBody = (data, type) => {
         type: type,
         start: data.start.format(),
         end: data.end.format(),
-        approval: data.approval,
+        approved: data.approval ==='pre',
         category: data.category,
-        options: final_options
+        options: final_options,
+        album: data.album,
+        resultPolicy: data.result
     }
     console.log(body);  
     return body;
