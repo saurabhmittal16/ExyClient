@@ -474,6 +474,35 @@ template {
     transform-origin: 0px 0px 0px;
     display: flex; }
 
+.search_bar {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 5px 50px 5px; }
+  .search_bar input {
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px #1010102c;
+    width: 94%;
+    border-radius: 0;
+    font-size: 14px; }
+  .search_bar input:focus, .search_bar input:hover {
+    border: none;
+    border-bottom: solid 1px #10101057;
+    outline: 0;
+    box-shadow: none; }
+  .search_bar .search_icon {
+    font-size: 19px;
+    padding: 10px; }
+  .search_bar .add_icon {
+    font-size: 18px;
+    background-color: blue;
+    color: white;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    padding-top: 11px;
+    cursor: pointer; }
+
 body {
   background-color: #10101010; }
 

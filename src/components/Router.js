@@ -4,8 +4,10 @@ import RequireAdminAuth from '../utils/requireAdminAuth';
 
 import Dashboard from './Dashboard';
 import NewSurvey from './NewSurvey';
-import Albums from './Albums';
+import Albums from './Albums/Albums';
+import NewAlbum from './Albums/NewAlbum';
 import SubUser from './SubUsers/SubUsers';
+import NewSubUser from './SubUsers/NewSubUser';
 
 class Router extends React.Component {
     render() {
@@ -14,8 +16,10 @@ class Router extends React.Component {
                 <Switch>
                     <Route exact path='/' component={Dashboard} />
                     <Route exact path='/survey/new' component={NewSurvey} />
-                    <Route exact path='/albums' component={Albums}/>
+                    <Route exact path='/albums' component={Albums} />
+                    <Route exact path='/albums/new' component={RequireAdminAuth(NewAlbum)} />
                     <Route exact path='/subusers' component={RequireAdminAuth(SubUser)} />
+                    <Route exact path='/subusers/new' component={RequireAdminAuth(NewSubUser)} />
                 </Switch>
             </div>
         );

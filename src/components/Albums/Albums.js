@@ -1,23 +1,47 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
+import { Card, Row, Col, Input, Icon } from 'antd';
 
-import Loading from './Loading';
+import Loading from '../Loading';
 const { Meta } = Card;
 
+const fileteredData = (albums, query) => {
+    query = query.toLowerCase();
+    const result = albums.filter(
+        item => item.text.toLowerCase().includes(query)
+    );
+    return result;
+}
+
 class Albums extends React.Component {
-    componentWillMount() {
-        // console.log("Mounting Albums");
+    constructor(props) {
+        super(props);
+        this.state = {
+            query: ''
+        }
     }
 
     render() {
         return (
             <div>
+                <div
+                    className='search_bar'
+                >
+                    <Icon type="search" className='search_icon'/>
+                    <Input 
+                        disabled={!(this.props.user && this.props.user.albums)}
+                        onChange={e => this.setState({query: e.target.value})}
+                    />
+                    <Link to ='/subusers/new'>
+                        <Icon type="plus" className='add_icon'/>
+                    </Link>
+                </div>
                 {
-                    this.props.user && !!this.props.user.albums ? (
+                    this.props.user && this.props.user.albums ? (
                         <Row>
                             {
-                                this.props.user.albums.map(
+                                fileteredData(this.props.user.albums, this.state.query).map(
                                     (item, index) => (
                                         <Col 
                                             lg={4}
@@ -38,7 +62,8 @@ class Albums extends React.Component {
                                                         style={{
                                                             width: '100%',
                                                             height: '225px',
-                                                            margin: '5px'
+                                                            margin: '5px',
+                                                            padding: '10px'
                                                         }}
                                                     />
                                                 }
