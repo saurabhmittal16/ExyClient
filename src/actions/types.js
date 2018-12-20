@@ -12,3 +12,6 @@ export const SET_ERRORS = 'SET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 export const SET_SUB_USERS = 'SET_SUB_USERS';
+export const ADD_SUB_USER = 'ADD_SUB_USER';
+
+export const ADD_ALBUM = 'ADD_ALBUM';

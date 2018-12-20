@@ -36,6 +36,7 @@ class SubUsers extends React.Component {
                 >
                     <Icon type="search" className='search_icon'/>
                     <Input 
+                        placeholder='Name'
                         disabled={!(this.props.subUsers !== undefined)}
                         onChange={e => this.setState({query: e.target.value})}
                     />

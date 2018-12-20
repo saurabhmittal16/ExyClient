@@ -18,3 +18,4 @@ Axios
 - [x] ~~Start date should be before end and after current~~
 - [ ] 404 and Nothing found component
 - [ ] Disable current time in start of new survey form  
+- [ ] Use the error object in redux state in components  

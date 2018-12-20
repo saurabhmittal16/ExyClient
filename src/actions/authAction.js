@@ -8,7 +8,7 @@ export const login = (values) => {
     return async (dispatch) => {
         try {
             const response = await axios.post(`${config.server_url}/api/auth/admin/login`, values);
-            if (response.status === 200 && response.data.code === 2) {
+            if (response.status === 200 && response.data.success && response.data.code === 2) {
                 const token = response.data.token;
                 const user = jwtDecode(token);
                 dispatch(setCurrentUser(user));

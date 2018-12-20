@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../config';
-import { SET_USER_DETAILS, SET_SUB_USERS, SET_ERRORS, CLEAR_ERRORS } from './types';
+import { SET_USER_DETAILS, SET_SUB_USERS, SET_ERRORS, CLEAR_ERRORS, ADD_ALBUM } from './types';
 
 // Get User details
 export const getUserDetails = () => {
@@ -8,7 +8,6 @@ export const getUserDetails = () => {
     return async dispatch => {
         try {
             const res = await axios.get(`${config.server_url}/api/admin/details`);
-            console.log("User details fetched", res.data);
             if (res.status === 200) {
                 dispatch({
                     type: CLEAR_ERRORS
@@ -42,6 +41,28 @@ export const getSubUsers = () => {
             }
         } catch (err) {
             console.log(err);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response
+            });
+        }
+    }
+}
+
+// Add album
+export const addNewAlbum = (values) => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.post(`${config.server_url}/api/admin/albums`, values);
+            if (res.status === 200) {
+                dispatch({ type: CLEAR_ERRORS });
+                dispatch({
+                    type: ADD_ALBUM,
+                    payload: res.data
+                })
+            }
+        } catch (err) {
+            console.log(err.response);
             dispatch({
                 type: SET_ERRORS,
                 payload: err.response
