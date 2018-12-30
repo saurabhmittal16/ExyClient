@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Icon, Layout, Menu, Popover } from 'antd';
+import { Icon, Layout, Menu, Popover, Modal } from 'antd';
 import Router from './Router';
 
 import { logout } from '../actions/authAction';
@@ -76,109 +76,126 @@ class Container extends React.Component {
 
     render() {
         return (
-            <Layout className={'admin-panel'} style={{minHeight: '100vh'}}>
-                <div className='admin_header'>
-                    <span className='text_logo'>
-                        EXXY
-                    </span>
-                    <div className="container_header">
-                        <div className="icons">
-                            <Popover
-                                placement="bottomRight"
-                                arrowPointAtCenter
-                                style={{padding: 0}}
-                                trigger={['click']}
-                                content={
-                                    <div>
-                                        <div style={{cursor: 'pointer'}} onClick={this.logout}>
-                                            Logout
-                                        </div>
+            <div>
+                <Layout className={'admin-panel'} style={{minHeight: '100vh'}}>
+                    <div className='admin_header'>
+                        <span className='text_logo'>
+                            EXXY
+                        </span>
+                        <div className="container_header">
+                            <div className="icons">
+                                <Popover
+                                    placement="bottomRight"
+                                    arrowPointAtCenter
+                                    style={{padding: 0}}
+                                    trigger={['click']}
+                                    content={
                                         <div>
-                                            {this.props.email}
+                                            <div style={{cursor: 'pointer'}} onClick={this.logout}>
+                                                Logout
+                                            </div>
+                                            <div>
+                                                {this.props.email}
+                                            </div>
                                         </div>
-                                    </div>
-                                }
-                            >
-                                <img 
-                                    src="https://cdn2.iconfinder.com/data/icons/social-media-8/512/Chrome.png"
-                                    className="photo__avatar" 
-                                    style={{cursor: 'pointer'}}
-                                    alt="logo"
-                                />
-                            </Popover>
+                                    }
+                                >
+                                    <img 
+                                        src="https://cdn2.iconfinder.com/data/icons/social-media-8/512/Chrome.png"
+                                        className="photo__avatar" 
+                                        style={{cursor: 'pointer'}}
+                                        alt="logo"
+                                    />
+                                </Popover>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <Layout>
-                    <Sider
-                        collapsed={true}
-                        onCollapse={this.onCollapse}
-                        breakpoint="lg"
-                        collapsedWidth="85"
-                        width={200}
-                        style={{backgroundColor: '#0278bde7'}}
-                    >
-                        <Menu 
-                            theme="dark" 
-                            mode="inline" 
-                            defaultSelectedKeys={[this.getCurrentSider()]}
-                            style={{width: '85px', marginTop: '5px'}}
+                    <Layout>
+                        <Sider
+                            collapsed={true}
+                            onCollapse={this.onCollapse}
+                            breakpoint="lg"
+                            collapsedWidth="85"
+                            width={200}
+                            style={{backgroundColor: '#0278bde7'}}
                         >
-                        {
-                            sider.map(
-                                (item, index) => (
+                            <Menu 
+                                theme="dark" 
+                                mode="inline" 
+                                defaultSelectedKeys={[this.getCurrentSider()]}
+                                style={{width: '85px', marginTop: '5px'}}
+                            >
+                            {
+                                sider.map(
+                                    (item, index) => (
+                                        <Menu.Item 
+                                            key={index+1}
+                                            title={item[2]}
+                                        >
+                                            <Link to={item[1]}>
+                                                <Icon type={item[0]} theme="outlined" />
+                                            </Link>
+                                        </Menu.Item> 
+                                    )
+                                )
+                            }
+                            
+                            {
+                                this.props.isAdmin ? (
                                     <Menu.Item 
-                                        key={index+1}
-                                        title={item[2]}
+                                        key={4}
+                                        title="Sub Users"
                                     >
-                                        <Link to={item[1]}>
-                                            <Icon type={item[0]} theme="outlined" />
+                                        <Link to='/subusers'>
+                                            <Icon type='user' theme="outlined" />
                                         </Link>
                                     </Menu.Item> 
-                                )
-                            )
-                        }
-                        
-                        {
-                            this.props.isAdmin ? (
-                                <Menu.Item 
-                                    key={4}
-                                    title="Sub Users"
-                                >
-                                    <Link to='/subusers'>
-                                        <Icon type='user' theme="outlined" />
-                                    </Link>
-                                </Menu.Item> 
-                            ) : null
-                        }
+                                ) : null
+                            }
 
-                            <React.Fragment>
-                                <hr style={{color: 'white', width: '70%'}} />
-                                <Link to='/survey/new'>
-                                    <Icon 
-                                        style={{
-                                            borderRadius: '50%',
-                                            backgroundColor: '#60c2e6',
-                                            margin: '19px',
-                                            padding: '15px',
-                                            fontSize: '18px',
-                                            cursor: 'pointer'
-                                        }}
-                                        type='plus' 
-                                    />
-                                </Link>
-                            </React.Fragment>
-                        </Menu>
-                    </Sider>
-                    <Content style={{overflow: 'scrollable'}}>
-                        <NavBar />
-                        <div style={{margin: '40px 70px'}}>
-                            <Router />
-                        </div>
-                    </Content>
+                                <React.Fragment>
+                                    <hr style={{color: 'white', width: '70%'}} />
+                                    <Link to='/survey/new'>
+                                        <Icon 
+                                            style={{
+                                                borderRadius: '50%',
+                                                backgroundColor: '#60c2e6',
+                                                margin: '19px',
+                                                padding: '15px',
+                                                fontSize: '18px',
+                                                cursor: 'pointer'
+                                            }}
+                                            type='plus' 
+                                        />
+                                    </Link>
+                                </React.Fragment>
+                            </Menu>
+                        </Sider>
+                        <Content style={{overflow: 'scrollable'}}>
+                            <NavBar />
+                            <div style={{margin: '40px 70px'}}>
+                                <Router />
+                            </div>
+                        </Content>
+                    </Layout>
                 </Layout>
-            </Layout>
+                {
+                    this.props.error && this.props.error.statusCode === 401 && (
+                        <Modal
+                            visible={true}
+                            closable={false}
+                            onOk={() => {
+                                localStorage.clear();
+                                this.props.history.push('/login');
+                            }}
+                            cancelButtonDisabled={true}
+                        >
+                            <p>Session expired. You need to login again</p>
+                        </Modal>
+                    )
+                }
+            </div>            
         );
     }
 }
@@ -187,7 +204,8 @@ const mapStateToProps = (state) => {
     return {
         email: state.auth.user.email,
         isAuthenticated: state.auth.isAuthenticated,
-        isAdmin: state.auth.isAdmin
+        isAdmin: state.auth.isAdmin,
+        error: state.error.data
     }
 };
 

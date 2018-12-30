@@ -18,7 +18,7 @@ export const getUserDetails = () => {
                 });
             }
         } catch (err) {
-            console.log("Caught", err.response);
+            console.log(err.response);
             dispatch({
                 type: SET_ERRORS,
                 payload: err.response
@@ -40,7 +40,7 @@ export const getSubUsers = () => {
                 });
             }
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             dispatch({
                 type: SET_ERRORS,
                 payload: err.response
