@@ -138,7 +138,7 @@ class RatingFeedback extends React.Component {
                                                     <Select placeholder="Select an Album">
                                                     {
                                                         this.props.user.albums && this.props.user.albums.map(
-                                                            (item, index) => <Option key={index} value={item.text}>{item.text}</Option>
+                                                            item => <Option key={item.name} value={item.name}>{item.name}</Option>
                                                         )
                                                     }
                                                     </Select>
