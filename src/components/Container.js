@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Icon, Layout, Menu, Popover, Modal, Button } from 'antd';
 import Router from './Router';
 
-import { logout } from '../actions/authAction';
+import { logout } from '../actions/authActions';
 import { getUserDetails } from '../actions/userActions';
 
 const {Content, Sider} = Layout;

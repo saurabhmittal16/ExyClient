@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
 import setAuthHeaders from './utils/setAuthHeaders';
-import { setCurrentUser } from './actions/authAction';
+import { setCurrentUser } from './actions/authActions';
 
 import App from './components/App';
 import './styles/main.css';

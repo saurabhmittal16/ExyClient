@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, message } from 'antd';
 
-import { login } from '../actions/authAction';
+import { login } from '../actions/authActions';
 import { getUserDetails } from '../actions/userActions';
 
 const FormItem = Form.Item;

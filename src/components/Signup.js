@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, Col, Row, Input, Button } from 'antd';
+import { Form, Col, Row, Input, Button, message } from 'antd';
+
+import { signup } from '../actions/signupActions';
 
 const FormItem = Form.Item;
 const ImagePlaceholder = () => (
@@ -20,11 +22,35 @@ const ImagePlaceholder = () => (
 
 class Signup extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: undefined
+        }
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
+        this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
-                console.log(values);
+                try {
+                    const res = await signup(values);
+                    if (res.data.code === 1) {
+                        this.setState({
+                            error: undefined
+                        });
+                        message.success('Signup successful');
+                        this.props.history.push('/login');
+                    } else {
+                        this.setState({
+                            error: res.data.message
+                        });
+                    }
+                } catch (err) {
+                    this.setState({
+                        error: 'There was some problem with the server. Try again later.'
+                    })
+                }
             }    
         });
     }
