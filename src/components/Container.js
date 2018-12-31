@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Icon, Layout, Menu, Popover, Modal } from 'antd';
+import { Icon, Layout, Menu, Popover, Modal, Button } from 'antd';
 import Router from './Router';
 
 import { logout } from '../actions/authAction';
@@ -50,11 +50,17 @@ class Container extends React.Component {
             image: ''
         };
         this.logout = this.logout.bind(this);
+        this.redirect = this.redirect.bind(this);
     }
 
     componentWillMount() {
         // console.log("Mounting Container");
         this.props.getUserDetails();
+    }
+
+    redirect() {
+        localStorage.clear();
+        this.props.history.push('/login');
     }
 
     logout() {
@@ -185,11 +191,9 @@ class Container extends React.Component {
                         <Modal
                             visible={true}
                             closable={false}
-                            onOk={() => {
-                                localStorage.clear();
-                                this.props.history.push('/login');
-                            }}
-                            cancelButtonDisabled={true}
+                            footer={[
+                                <Button type='primary' onClick={this.redirect}>Ok</Button>
+                            ]}
                         >
                             <p>Session expired. You need to login again</p>
                         </Modal>

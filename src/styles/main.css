@@ -520,3 +520,7 @@ body {
   font-size: 36px;
   padding: 0 10px;
   margin: 7px 0; }
+
+.new-form {
+  width: 60%;
+  margin: 0 auto; }

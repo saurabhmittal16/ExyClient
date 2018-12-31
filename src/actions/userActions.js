@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../config';
-import { SET_USER_DETAILS, SET_SUB_USERS, SET_ERRORS, CLEAR_ERRORS, ADD_ALBUM } from './types';
+import { SET_USER_DETAILS, SET_SUB_USERS, SET_ERRORS, CLEAR_ERRORS, ADD_ALBUM, ADD_SUB_USER } from './types';
 
 // Get User details
 export const getUserDetails = () => {
@@ -49,6 +49,30 @@ export const getSubUsers = () => {
     }
 }
 
+// Add a subuser
+export const addSubUser = (values) => {
+    values.canApprove = values.canApprove === 'true';
+    return async (dispatch) => {
+        try {
+            const res = await axios.post(`${config.server_url}/api/sub-admin`, values);
+            if (res.status === 200 && res.data.code === 1) {
+                dispatch({ type: CLEAR_ERRORS });
+                dispatch({
+                    type: ADD_SUB_USER,
+                    payload: res.data
+                });
+            }
+            return res;
+        } catch (err) {
+            console.log(err.response);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response
+            });
+        }
+    }
+} 
+
 // Add album
 export const addNewAlbum = (values) => {
     return async (dispatch) => {
@@ -61,6 +85,7 @@ export const addNewAlbum = (values) => {
                     payload: res.data
                 })
             }
+            return res;
         } catch (err) {
             console.log(err.response);
             dispatch({

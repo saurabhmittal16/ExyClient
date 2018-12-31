@@ -1,4 +1,4 @@
-import { SET_USER_DETAILS, SET_SUB_USERS, ADD_ALBUM } from '../actions/types';
+import { SET_USER_DETAILS, SET_SUB_USERS, ADD_ALBUM, ADD_SUB_USER } from '../actions/types';
 
 const initialState = {
     details: {},
@@ -24,6 +24,11 @@ export default (state = initialState, action) => {
                     ...state.details,
                     albums: action.payload
                 }
+            }
+        case ADD_SUB_USER:
+            return {
+                ...state,
+                subUsers: state.subUsers.concat(action.payload.data)
             }
         default:
             return state;

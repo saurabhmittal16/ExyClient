@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Form, Input, Row, Col, Button, Card, notification, message } from 'antd';
+import ErrorComponent from '../ErrorComponent';
 
 import { addNewAlbum } from '../../actions/userActions';
 
@@ -32,16 +33,18 @@ class NewAlbum extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
-                this.props.addNewAlbum(values);
-                if (_.isEmpty(this.props.error)) {
-                    notification.open({
-                        message: 'Album created',
-                        description: 'A new album was added',
-                    });
-                    this.props.history.push('/albums');
-                } else {
-                    message.error('There was some error');
-                }
+                try {
+                    const res = await this.props.addNewAlbum(values);
+                    if (res.status === 200) {
+                        notification.open({
+                            message: 'Album created',
+                            description: 'A new album was added',
+                        });
+                        this.props.history.push('/albums');
+                    } else {
+                        message.error('There was some error');
+                    }
+                } catch (err) { }
             }
         });
     }
@@ -50,7 +53,12 @@ class NewAlbum extends React.Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <div>
-                <Card>
+                {
+                    !_.isEmpty(this.props.error) && <ErrorComponent history={this.props.history}/>
+                }
+                <Card
+                   className='new-form'
+                >
                     <Form
                         onSubmit={this.handleSubmit}
                     >
@@ -84,6 +92,7 @@ class NewAlbum extends React.Component {
                                 </FormItem>
                                 <FormItem>
                                     <Button type="primary" htmlType="submit">Submit</Button>
+                                    <Button type="danger" style={{marginLeft: '10px'}} onClick={() => this.props.history.push('/albums')}>Back</Button>
                                 </FormItem>
                             </Col>
                             <Col span={8}>
