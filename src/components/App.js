@@ -3,11 +3,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import RequireAuth from '../utils/requireAuth';
 import Login from './Login';
+import Signup from './Signup';
 import Container from './Container';
 
-const Signup = () => (
-    <h1>Signup</h1>
-);
 
 const ForgotPassword = () => (
     <h1>ForgotPassword</h1>

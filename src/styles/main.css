@@ -503,6 +503,19 @@ template {
     padding-top: 11px;
     cursor: pointer; }
 
+.signup_body {
+  padding: 70px 30px;
+  margin: auto;
+  max-width: 1200px; }
+  .signup_body .signup_form {
+    border: 1px solid #dcdcdc;
+    padding: 30px;
+    background-color: #fff; }
+  .signup_body .ant-form-item {
+    margin-bottom: 0px; }
+  .signup_body .submit_btn {
+    margin-top: 25px; }
+
 body {
   background-color: #10101010; }
 

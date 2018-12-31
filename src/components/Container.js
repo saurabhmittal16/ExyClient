@@ -25,16 +25,24 @@ const NavBar = () => (
             </Link>
         </Menu.Item>
         <Menu.Item key="2">
-            <Icon type="loading-3-quarters" />Pending Approval
+            <Link to="/survey/pending">
+                <Icon type="loading-3-quarters" />Pending Approval
+            </Link>
         </Menu.Item>
         <Menu.Item key="3">
-            <Icon type="file-done" />Ready To Publish
+            <Link to="/survey/ready">
+                <Icon type="file-done" />Ready To Publish
+            </Link>
         </Menu.Item>
         <Menu.Item key="4">
-            <Icon type="rocket" />Published
+            <Link to="/survey/published">
+                <Icon type="rocket" />Published
+            </Link>
         </Menu.Item>
         <Menu.Item key="5">
-            <Icon type="stop" />Discarded
+            <Link to="/survey/discarded">
+                <Icon type="stop" />Discarded
+            </Link>
         </Menu.Item>
     </Menu>
 );

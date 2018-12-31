@@ -19,3 +19,4 @@ Axios
 - [ ] 404 and Nothing found component
 - [ ] Disable current time in start of new survey form  
 - [ ] Use the error object in redux state in components  
+- [ ] Add strong password validation (only frontend)

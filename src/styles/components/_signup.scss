@@ -1,0 +1,19 @@
+.signup_body {
+    padding: 70px 30px;
+    margin: auto;
+    max-width: 1200px;
+
+    .signup_form {
+        border: 1px solid #dcdcdc;
+        padding: 30px;
+        background-color: #fff;
+    }
+
+    .ant-form-item {
+        margin-bottom: 0px;
+    }
+
+    .submit_btn {
+        margin-top: 25px;
+    }
+}
