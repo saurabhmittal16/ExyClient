@@ -153,7 +153,7 @@ class NewSubUser extends React.Component {
                                 </FormItem>
                                 <FormItem>
                                     <Button type="primary" htmlType="submit">Submit</Button>
-                                    <Button type="danger" style={{marginLeft: '10px'}} onClick={() => this.props.history.push('/albums')}>Back</Button>
+                                    <Button type="danger" style={{marginLeft: '10px'}} onClick={() => this.props.history.push('/subusers')}>Back</Button>
                                 </FormItem>
                             </Col>
                             <Col span={8}>
