@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import { SET_CURRENT_USER, REMOVE_CURRENT_USER, SET_USER_DETAILS } from '../actions/types';
+import { SET_CURRENT_USER, REMOVE_CURRENT_USER } from '../actions/types';
 
 const initialState = {
     isAuthenticated: false,
@@ -19,15 +19,6 @@ export default (state = initialState, action) => {
             return {
                 isAuthenticated: false,
                 user: null
-            }
-        case SET_USER_DETAILS:
-            return {
-                ...state,
-                loading: false,
-                user: {
-                    ...state.user,
-                    ...action.payload
-                }
             }
         default:
             return state;
