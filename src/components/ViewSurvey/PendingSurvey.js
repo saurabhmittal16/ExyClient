@@ -1,46 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Row, Col, Input, Icon } from 'antd';
+import { getUnapprovedSurveys } from '../../actions/surveyActions';
 
 import Loading from '../Loading';
 
-const fileteredData = (albums, query) => {
-    query = query.toLowerCase();
-    const result = albums.filter(
-        item => item.name.toLowerCase().includes(query)
-    );
-    return result;
-}
+// const fileteredData = (albums, query) => {
+//     query = query.toLowerCase();
+//     const result = albums.filter(
+//         item => item.name.toLowerCase().includes(query)
+//     );
+//     return result;
+// }
 
-const data = [
-    {
-        question: "What is my name?",
-        start: "24 May 2016, 12:40 PM",
-        end: "25 May 2016, 2:40 PM",
-    },
-    {
-        question: "What is my age?",
-        start: "24 May 2016, 12:40 PM",
-        end: "25 May 2016, 2:40 PM",
-    },
-    {
-        question: "What is my favorite color?",
-        start: "24 May 2016, 12:40 PM",
-        end: "25 May 2016, 2:40 PM",
-    },
-    {
-        question: "What is my favorite food?",
-        start: "24 May 2016, 12:40 PM",
-        end: "25 May 2016, 2:40 PM",
-    },
-]
+const readAbleDates = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('en-IN', {hour12: true});
+}
 
 class PendingSurvey extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: ''
+            query: '',
+            page: 1
         }
+    }
+
+    componentWillMount() {
+        if (this.props.surveys.length === 0)
+            this.props.getUnapprovedSurveys(this.state.page);
     }
 
     render() {
@@ -53,7 +43,7 @@ class PendingSurvey extends React.Component {
                         <Icon type="search" className='search_icon'/>
                         <Input 
                             placeholder='Name'
-                            // disabled={!(this.props.user && this.props.user.albums)}
+                            disabled={!this.props.surveys}
                             onChange={e => this.setState({query: e.target.value})}
                         />
                         <Link to ='/survey/new'>
@@ -63,7 +53,7 @@ class PendingSurvey extends React.Component {
                 </div>
                 <div>
                 {
-                    data.map(
+                    this.props.surveys.length > 0 ? this.props.surveys.map(
                         (obj, index) => (
                             <div
                                 className='survey_card'
@@ -72,7 +62,7 @@ class PendingSurvey extends React.Component {
                                 <Row>
                                     <Col span={1}>
                                         <div 
-                                            className='survey_image' 
+                                            className='survey_image'
                                         />
                                     </Col>
                                     <Col span={23}>
@@ -98,11 +88,11 @@ class PendingSurvey extends React.Component {
                                                 <div className='dates'>
                                                     <span>
                                                         <Icon type='hourglass'/>
-                                                        {obj.start}
+                                                        { readAbleDates(obj.start) }
                                                     </span>
                                                     <span>
                                                         <Icon type='hourglass'/>
-                                                        {obj.start}
+                                                        { readAbleDates(obj.end) }
                                                     </span>
                                                 </div>
                                             </div>
@@ -111,7 +101,7 @@ class PendingSurvey extends React.Component {
                                 </Row>
                             </div>
                         )
-                    )
+                    ) : <Loading />
                 }
                 </div>
             </div>
@@ -119,4 +109,11 @@ class PendingSurvey extends React.Component {
     }
 }
 
-export default PendingSurvey;
+const mapStateToProps = (state) => {
+    return {
+        surveys: state.survey.unapprovedSurveys,
+        pagination: state.survey.pagination
+    }
+}
+
+export default connect(mapStateToProps, { getUnapprovedSurveys })(PendingSurvey);

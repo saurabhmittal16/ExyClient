@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../config';
-import { ADD_SURVEY, SET_ERRORS, CLEAR_ERRORS } from './types';
+import { ADD_SURVEY, SET_ERRORS, CLEAR_ERRORS, GET_UNAPPROVED_SURVEY } from './types';
 
 const prepareRequestBody = (data, type) => {
     let final_options = []; 
@@ -54,3 +54,26 @@ export const addSurvey = (data, type) => {
         }    
     }
 };
+
+// Get unapproved surveys
+export const getUnapprovedSurveys = (page) => {
+    return async dispatch => {
+        try {
+            const res = await axios.get(`${config.server_url}/api/survey/unapproved?page=${page}`);
+            dispatch({
+                type: CLEAR_ERRORS,
+            });
+            dispatch({
+                type: GET_UNAPPROVED_SURVEY,
+                payload: res.data 
+            });
+            
+        } catch (err) {
+            console.log("Caught", err.response);
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response
+            });
+        }
+    }
+}

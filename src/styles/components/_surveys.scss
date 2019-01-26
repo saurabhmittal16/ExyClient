@@ -29,6 +29,7 @@
             font-size: 16px;
 
             * {
+                font-size: 15px;
                 span {
                     margin: 0 4px;
                 }
@@ -36,13 +37,8 @@
                     margin: 0 2px;
                 }
             }
-
-            .icons {
-                font-size: 15px;
-            }
-
+            
             .dates {
-                font-size: 14px;
                 margin-right: 25px;
             }
         }

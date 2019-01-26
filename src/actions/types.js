@@ -7,6 +7,7 @@ export const USER_LOADING = 'USER_LOADING';
 export const SET_USER_DETAILS = 'SET_USER_DETAILS';
 
 export const ADD_SURVEY = 'ADD_SURVEY';
+export const GET_UNAPPROVED_SURVEY = 'GET_UNAPPROVED_SURVEY';
 
 export const SET_ERRORS = 'SET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';

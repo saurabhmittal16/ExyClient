@@ -539,14 +539,13 @@ template {
       display: flex;
       justify-content: space-between;
       font-size: 16px; }
-      .survey_card .survey_body .sub_title * span {
-        margin: 0 4px; }
-      .survey_card .survey_body .sub_title * i {
-        margin: 0 2px; }
-      .survey_card .survey_body .sub_title .icons {
+      .survey_card .survey_body .sub_title * {
         font-size: 15px; }
+        .survey_card .survey_body .sub_title * span {
+          margin: 0 4px; }
+        .survey_card .survey_body .sub_title * i {
+          margin: 0 2px; }
       .survey_card .survey_body .sub_title .dates {
-        font-size: 14px;
         margin-right: 25px; }
 
 body {

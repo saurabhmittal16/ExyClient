@@ -1,7 +1,9 @@
-import { ADD_SURVEY } from '../actions/types';
+import { ADD_SURVEY, GET_UNAPPROVED_SURVEY } from '../actions/types';
 
 const initialState = {
-    surveys: []
+    surveys: [],
+    unapprovedSurveys: [],
+    pagination: {}
 }
 
 export default (state = initialState, action) => {
@@ -9,6 +11,19 @@ export default (state = initialState, action) => {
         case ADD_SURVEY: {
             return {
                 surveys: [...state.surveys, action.payload]
+            }
+        }
+        case GET_UNAPPROVED_SURVEY: {
+            return {
+                ...state,
+                pagination: {
+                    page: action.payload.page,
+                    last: action.payload.last
+                },
+                unapprovedSurveys: [
+                    ...state.unapprovedSurveys,
+                    ...action.payload.data
+                ]
             }
         }
         default:
