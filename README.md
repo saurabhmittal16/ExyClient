@@ -20,3 +20,7 @@ Axios
 - [ ] Disable current time in start of new survey form  
 - [ ] Use the error object in redux state in components  
 - [ ] Add strong password validation (only frontend)
+
+## TASKS -
+- [ ] Edit sub user and sub user profile
+- [ ] Better signup page

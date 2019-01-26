@@ -63,12 +63,12 @@ class SubUsers extends React.Component {
                                                     style={{
                                                         boxShadow: '0 0px 1px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23)'
                                                     }}
-                                                    cover={
-                                                        <img 
-                                                            src={item.image} 
-                                                            alt={item.name}
-                                                        />
-                                                    }
+                                                    // cover={
+                                                    //     <img 
+                                                    //         src={item.image} 
+                                                    //         alt={item.name}
+                                                    //     />
+                                                    // }
                                                 >
                                                     <Meta 
                                                         title={item.name}
