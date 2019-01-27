@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Row, Col, Input, Icon } from 'antd';
+import { Input, Icon } from 'antd';
 import { getUnapprovedSurveys } from '../../actions/surveyActions';
 
+import SurveyCard from './SurveyCard';
 import Loading from '../Loading';
 
 // const fileteredData = (albums, query) => {
@@ -13,11 +14,6 @@ import Loading from '../Loading';
 //     );
 //     return result;
 // }
-
-const readAbleDates = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('en-IN', {hour12: true});
-}
 
 class PendingSurvey extends React.Component {
     constructor(props) {
@@ -55,51 +51,10 @@ class PendingSurvey extends React.Component {
                 {
                     this.props.surveys.length > 0 ? this.props.surveys.map(
                         (obj, index) => (
-                            <div
-                                className='survey_card'
+                            <SurveyCard
                                 key={index}
-                            >
-                                <Row>
-                                    <Col span={1}>
-                                        <div 
-                                            className='survey_image'
-                                        />
-                                    </Col>
-                                    <Col span={23}>
-                                        <div className='survey_body'>
-                                            <div className='title'>
-                                                {obj.question}
-                                            </div>
-                                            <div className='sub_title'>
-                                                <div className='icons'>
-                                                    <span>
-                                                        <Icon type='select'/>{1}
-                                                    </span>
-                                                    <span>
-                                                        <Icon type='message'/>{2}
-                                                    </span>
-                                                    <span>
-                                                        <Icon type='like'/>{3}
-                                                    </span>
-                                                    <span>
-                                                        <Icon type='dislike'/>{0}
-                                                    </span>
-                                                </div>
-                                                <div className='dates'>
-                                                    <span>
-                                                        <Icon type='hourglass'/>
-                                                        { readAbleDates(obj.start) }
-                                                    </span>
-                                                    <span>
-                                                        <Icon type='hourglass'/>
-                                                        { readAbleDates(obj.end) }
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </div>
+                                survey={obj}
+                            />
                         )
                     ) : <Loading />
                 }
