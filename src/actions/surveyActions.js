@@ -67,7 +67,6 @@ export const getUnapprovedSurveys = (page) => {
                 type: GET_UNAPPROVED_SURVEY,
                 payload: res.data 
             });
-            console.log(res.data);
         } catch (err) {
             console.log("Caught", err.response);
             dispatch({

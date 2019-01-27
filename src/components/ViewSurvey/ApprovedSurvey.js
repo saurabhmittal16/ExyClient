@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Input, Icon } from 'antd';
 
-const fileteredData = (albums, query) => {
-    query = query.toLowerCase();
-    const result = albums.filter(
-        item => item.name.toLowerCase().includes(query)
-    );
-    return result;
-}
+// const fileteredData = (albums, query) => {
+//     query = query.toLowerCase();
+//     const result = albums.filter(
+//         item => item.name.toLowerCase().includes(query)
+//     );
+//     return result;
+// }
 
 class ApprovedSurvey extends React.Component {
     constructor(props) {

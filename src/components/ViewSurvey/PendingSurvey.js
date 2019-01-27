@@ -83,6 +83,7 @@ class PendingSurvey extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state.survey);
     return {
         surveys: state.survey.unapprovedSurveys,
         pagination: state.survey.pagination

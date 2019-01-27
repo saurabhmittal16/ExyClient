@@ -14,14 +14,10 @@ export default (state = initialState, action) => {
             }
         }
         case GET_UNAPPROVED_SURVEY: {
-            if (state.pagination.page === action.payload.page || action.payload.last)
-                return {
-                    ...state,
-                    pagination: {
-                        page: action.payload.page,
-                        last: action.payload.last
-                    }
-                }
+            console.log(state.pagination.last);
+            if (state.pagination.last) {
+                return state;
+            }
             return {
                 ...state,
                 pagination: {
