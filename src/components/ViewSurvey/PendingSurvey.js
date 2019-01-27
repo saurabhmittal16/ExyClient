@@ -86,7 +86,7 @@ const mapStateToProps = (state) => {
     console.log(state.survey);
     return {
         surveys: state.survey.unapprovedSurveys,
-        pagination: state.survey.pagination
+        pagination: state.survey.unapprovedPage
     }
 }
 
