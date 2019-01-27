@@ -59,7 +59,7 @@ export const addSurvey = (data, type) => {
 export const getUnapprovedSurveys = (page) => {
     return async dispatch => {
         try {
-            const res = await axios.get(`${config.server_url}/api/survey/unapproved?page=${page}`);
+            const res = await axios.get(`${config.server_url}/api/survey/approved?page=${page}`);
             dispatch({
                 type: CLEAR_ERRORS,
             });
@@ -67,7 +67,7 @@ export const getUnapprovedSurveys = (page) => {
                 type: GET_UNAPPROVED_SURVEY,
                 payload: res.data 
             });
-            
+            console.log(res.data);
         } catch (err) {
             console.log("Caught", err.response);
             dispatch({

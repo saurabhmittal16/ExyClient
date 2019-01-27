@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Input, Icon } from 'antd';
-import { getUnapprovedSurveys } from '../../actions/surveyActions';
+import { Input, Icon, Button } from 'antd';
 
+import { getUnapprovedSurveys } from '../../actions/surveyActions';
 import SurveyCard from './SurveyCard';
 import Loading from '../Loading';
 
-// const fileteredData = (albums, query) => {
-//     query = query.toLowerCase();
-//     const result = albums.filter(
-//         item => item.name.toLowerCase().includes(query)
-//     );
-//     return result;
-// }
+const fileteredData = (albums, query) => {
+    query = query.toLowerCase();
+    const result = albums.filter(
+        item => item.question.toLowerCase().includes(query)
+    );
+    return result;
+}
 
 class PendingSurvey extends React.Component {
     constructor(props) {
@@ -22,11 +22,20 @@ class PendingSurvey extends React.Component {
             query: '',
             page: 1
         }
+        this.handleMore = this.handleMore.bind(this);
     }
 
     componentWillMount() {
-        if (this.props.surveys.length === 0)
-            this.props.getUnapprovedSurveys(this.state.page);
+        this.props.getUnapprovedSurveys(this.state.page);
+    }
+
+    handleMore() {
+        this.setState(
+            prevState => ({
+                page: prevState.page + 1
+            }), 
+            () => this.props.getUnapprovedSurveys(this.state.page)
+        );
     }
 
     render() {
@@ -49,7 +58,7 @@ class PendingSurvey extends React.Component {
                 </div>
                 <div>
                 {
-                    this.props.surveys.length > 0 ? this.props.surveys.map(
+                    this.props.surveys.length > 0 ? fileteredData(this.props.surveys, this.state.query).map(
                         (obj, index) => (
                             <SurveyCard
                                 key={index}
@@ -58,6 +67,15 @@ class PendingSurvey extends React.Component {
                         )
                     ) : <Loading />
                 }
+                    <div className='more'>
+                        <Button 
+                            type="default"
+                            onClick={this.handleMore}
+                            disabled={this.props.pagination.last}
+                        >
+                            <Icon type="reload" /> More
+                        </Button>
+                    </div>
                 </div>
             </div>
         )
