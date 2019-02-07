@@ -8,42 +8,49 @@ import { logout } from '../actions/authActions';
 import { getUserDetails } from '../actions/userActions';
 
 const {Content, Sider} = Layout;
-const sider = [
-    ["dashboard", "/", "Dashboard"],
-    ["file-done", "/albums", "Albums"],
-    ["wifi", "/", "Surveys"],
-]
 
-const NavBar = () => (
+const menus = {
+    'sider': [
+        ["dashboard", "/", "Dashboard"],
+        ["file-done", "/albums", "Albums"],
+        ["wifi", "/survey/ready", "Surveys"],
+    ],
+    'navbar': [
+        ["plus", "/survey/new", "Create"],
+        ["loading-3-quarters", "/survey/pending", "Pending Approval"],
+        ["file-done", "/survey/ready", "Ready To Publish"],
+        ["rocket", "/survey/published", "Published"],
+        ["stop", "/survey/discarded", "Discarded"]
+    ]
+}
+
+const getCurrentMenu = (currPath, type) => {
+    const items = menus[type];
+    let res = -1;
+    for(let i=0; i<items.length; i++)
+        if (items[i][1] === currPath)
+            res = i;
+    
+    return String(res);
+}
+
+const NavBar = (props) => (
     <Menu
         mode="horizontal"
         className="navbar"
+        defaultSelectedKeys={[getCurrentMenu(props.path, 'navbar')]}
     >
-        <Menu.Item key="1">
-            <Link to="/survey/new">
-                <Icon type="plus" />Create
-            </Link>
-        </Menu.Item>
-        <Menu.Item key="2">
-            <Link to="/survey/pending">
-                <Icon type="loading-3-quarters" />Pending Approval
-            </Link>
-        </Menu.Item>
-        <Menu.Item key="3">
-            <Link to="/survey/ready">
-                <Icon type="file-done" />Ready To Publish
-            </Link>
-        </Menu.Item>
-        <Menu.Item key="4">
-            <Link to="/survey/published">
-                <Icon type="rocket" />Published
-            </Link>
-        </Menu.Item>
-        <Menu.Item key="5">
-            <Link to="/survey/discarded">
-                <Icon type="stop" />Discarded
-            </Link>
-        </Menu.Item>
+    {
+        menus.navbar.map(
+            (item, index) => (
+                <Menu.Item key={index}>
+                    <Link to={item[1]}>
+                        <Icon type={item[0]} />{item[2]}
+                    </Link>
+                </Menu.Item>
+            )
+        )
+    }
     </Menu>
 );
 
@@ -79,14 +86,6 @@ class Container extends React.Component {
     onCollapse = (collapsed) => {
         this.setState({collapsed});
     };
-
-    getCurrentSider() {
-        const currPath = this.props.history.location.pathname;
-        const res = sider.find(
-            item => item[1] === currPath
-        );
-        return `${sider.indexOf(res)+1}`;
-    }
 
     render() {
         return (
@@ -137,14 +136,16 @@ class Container extends React.Component {
                             <Menu 
                                 theme="dark" 
                                 mode="inline" 
-                                defaultSelectedKeys={[this.getCurrentSider()]}
+                                defaultSelectedKeys={
+                                    [getCurrentMenu(this.props.history.location.pathname, 'sider')]
+                                }
                                 style={{width: '85px', marginTop: '5px'}}
                             >
                             {
-                                sider.map(
+                                menus.sider.map(
                                     (item, index) => (
                                         <Menu.Item 
-                                            key={index+1}
+                                            key={index}
                                             title={item[2]}
                                         >
                                             <Link to={item[1]}>
@@ -187,7 +188,7 @@ class Container extends React.Component {
                             </Menu>
                         </Sider>
                         <Content style={{overflow: 'scrollable'}}>
-                            <NavBar />
+                            <NavBar path={this.props.history.location.pathname}/>
                             <div style={{margin: '40px 70px'}}>
                                 <Router />
                             </div>
