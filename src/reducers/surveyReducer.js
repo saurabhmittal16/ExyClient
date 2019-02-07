@@ -4,46 +4,60 @@ const initialState = {
     approvedSurveys: [],
     approvedPage: {},
     unapprovedSurveys: [],
-    unapprovedPage: {}
+    unapprovedPage: {},
+    surveysAdded: []
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_SURVEY: {
-            return {
-                surveys: [...state.surveys, action.payload]
-            }
+            // fix: is this required
+            return state;
         }
         case GET_UNAPPROVED_SURVEY: {
-            if (state.unapprovedPage.last) {
-                return state;
+            if (action.payload.page === 1) {
+                return {
+                    ...state,
+                    unapprovedSurveys: action.payload.data,
+                    unapprovedPage: {
+                        page: action.payload.page,
+                        last: action.payload.last
+                    }
+                }
             }
             return {
                 ...state,
+                unapprovedSurveys: [
+                    ...state.unapprovedSurveys,
+                    ...action.payload.data
+                ],
                 unapprovedPage: {
                     page: action.payload.page,
                     last: action.payload.last
                 },
-                unapprovedSurveys: [
-                    ...state.unapprovedSurveys,
-                    ...action.payload.data
-                ]
             }
         }
         case GET_APPROVED_SURVEY: {
-            if (state.approvedPage.last) {
-                return state;
+            if (action.payload.page === 1) {
+                return {
+                    ...state,
+                    approvedSurveys: action.payload.data,
+                    approvedPage: {
+                        page: action.payload.page,
+                        last: action.payload.last
+                    }
+                }
             }
             return {
                 ...state,
+                approvedSurveys: [
+                    ...state.approvedSurveys,
+                    ...action.payload.data
+                ],
                 approvedPage: {
                     page: action.payload.page,
                     last: action.payload.last
                 },
-                approvedSurveys: [
-                    ...state.approvedSurveys,
-                    ...action.payload.data
-                ]
             }
         }
         default:
