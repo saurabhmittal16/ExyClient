@@ -92,9 +92,11 @@ class Container extends React.Component {
             <div>
                 <Layout className={'admin-panel'} style={{minHeight: '100vh'}}>
                     <div className='admin_header'>
-                        <span className='text_logo'>
-                            EXXY
-                        </span>
+                        <img 
+                            src='/exylogo.png'
+                            style={{marginLeft:'15px'}}
+                            alt="logo"
+                        />
                         <div className="container_header">
                             <div className="icons">
                                 <Popover
@@ -114,9 +116,7 @@ class Container extends React.Component {
                                     }
                                 >
                                     <img 
-                                        src="https://cdn2.iconfinder.com/data/icons/social-media-8/512/Chrome.png"
-                                        className="photo__avatar" 
-                                        style={{cursor: 'pointer'}}
+                                        src='/exylogo.png'
                                         alt="logo"
                                     />
                                 </Popover>

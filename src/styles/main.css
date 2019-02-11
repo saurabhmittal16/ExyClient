@@ -304,30 +304,25 @@ template {
 [hidden] {
   display: none; }
 
-.container_header {
+.admin_header img {
+  cursor: pointer;
+  height: 35px;
+  margin-top: 2px; }
+
+.container_header .icons {
   margin-right: 10px;
-  display: flex;
-  justify-content: space-between; }
-  .container_header * {
-    display: inline; }
-  .container_header .icons {
-    margin-right: 10px;
-    padding: 0 5px;
+  padding: 0 5px;
+  height: 40px;
+  float: right; }
+  .container_header .icons i {
+    font-size: 24px;
     height: 40px;
-    float: right; }
-    .container_header .icons i {
-      font-size: 24px;
-      height: 40px;
-      padding-top: 8px;
-      color: black;
-      display: flex;
-      align-self: center; }
-    .container_header .icons:hover {
-      background-color: #efefef; }
-  .container_header .photo__avatar {
-    height: 40px;
-    width: 40px;
-    vertical-align: middle; }
+    padding-top: 8px;
+    color: black;
+    display: flex;
+    align-self: center; }
+  .container_header .icons:hover {
+    background-color: #efefef; }
 
 .text_logo {
   letter-spacing: 2px;
