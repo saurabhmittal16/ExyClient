@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Input, Icon, Button } from 'antd';
 
-import { getUnapprovedSurveys } from '../../actions/surveyActions';
+import { getUnapprovedSurveys, clearSurvey } from '../../actions/surveyActions';
 import SurveyCard from './SurveyCard';
 import Loading from '../Utils/Loading';
 
@@ -27,6 +27,10 @@ class PendingSurvey extends React.Component {
 
     componentWillMount() {
         this.props.getUnapprovedSurveys(this.state.page);
+    }
+
+    componentWillUnmount() {
+        this.props.clearSurvey();
     }
 
     handleMore() {
@@ -89,4 +93,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getUnapprovedSurveys })(PendingSurvey);
+export default connect(mapStateToProps, { getUnapprovedSurveys, clearSurvey })(PendingSurvey);

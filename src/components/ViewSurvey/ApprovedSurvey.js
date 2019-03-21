@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Input, Icon, Button } from 'antd';
 
-import { getApprovedSurveys } from '../../actions/surveyActions';
+import { getApprovedSurveys, clearSurvey } from '../../actions/surveyActions';
 import SurveyCard from './SurveyCard';
 import Loading from '../Utils/Loading';
 
@@ -27,6 +27,10 @@ class ApprovedSurvey extends React.Component {
 
     componentWillMount() {
         this.props.getApprovedSurveys(this.state.page);
+    }
+
+    componentWillUnmount() {
+        this.props.clearSurvey();
     }
 
     handleMore() {
@@ -85,8 +89,8 @@ class ApprovedSurvey extends React.Component {
 const mapStateToProps = (state) => {
     return {
         surveys: state.survey.approvedSurveys,
-        pagination: state.survey.approvedPage
+        pagination: state.survey.approvedPage,
     }
 }
 
-export default connect(mapStateToProps, { getApprovedSurveys })(ApprovedSurvey);
+export default connect(mapStateToProps, { getApprovedSurveys, clearSurvey })(ApprovedSurvey);

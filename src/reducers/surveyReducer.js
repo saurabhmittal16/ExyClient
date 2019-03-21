@@ -1,11 +1,10 @@
-import { ADD_SURVEY, GET_UNAPPROVED_SURVEY, GET_APPROVED_SURVEY } from '../actions/types';
+import { ADD_SURVEY, CLEAR_SURVEY, GET_UNAPPROVED_SURVEY, GET_APPROVED_SURVEY } from '../actions/types';
 
 const initialState = {
     approvedSurveys: [],
     approvedPage: {},
     unapprovedSurveys: [],
     unapprovedPage: {},
-    surveysAdded: []
 }
 
 export default (state = initialState, action) => {
@@ -13,6 +12,9 @@ export default (state = initialState, action) => {
         case ADD_SURVEY: {
             // fix: is this required
             return state;
+        }
+        case CLEAR_SURVEY: {
+            return initialState;   
         }
         case GET_UNAPPROVED_SURVEY: {
             if (action.payload.page === 1) {

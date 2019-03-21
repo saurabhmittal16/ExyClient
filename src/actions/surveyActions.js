@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../config';
-import { ADD_SURVEY, SET_ERRORS, CLEAR_ERRORS, GET_UNAPPROVED_SURVEY, GET_APPROVED_SURVEY } from './types';
+import { ADD_SURVEY, SET_ERRORS, CLEAR_ERRORS, GET_UNAPPROVED_SURVEY, GET_APPROVED_SURVEY, CLEAR_SURVEY } from './types';
 
 const prepareRequestBody = (data, type) => {
     let final_options = []; 
@@ -98,5 +98,14 @@ export const getApprovedSurveys = (page) => {
                 payload: err.response
             });
         }
+    }
+}
+
+// Clear survey state
+export const clearSurvey = () => {
+    return async dispatch => {
+        dispatch({
+            type: CLEAR_SURVEY
+        });
     }
 }
