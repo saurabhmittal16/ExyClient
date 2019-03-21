@@ -5,7 +5,7 @@ import { Input, Icon, Button } from 'antd';
 
 import { getUnapprovedSurveys } from '../../actions/surveyActions';
 import SurveyCard from './SurveyCard';
-import Loading from '../Loading';
+import Loading from '../Utils/Loading';
 
 const fileteredData = (albums, query) => {
     query = query.toLowerCase();

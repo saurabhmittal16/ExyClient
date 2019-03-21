@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Form, Input, Row, Col, Button, Card, Select, notification, message } from 'antd';
-import ErrorComponent from '../ErrorComponent';
+import ErrorComponent from '../Utils/ErrorComponent';
 
 import { addSubUser } from '../../actions/userActions';
 

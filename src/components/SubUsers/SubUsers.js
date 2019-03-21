@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, Row, Col, Icon, Input } from 'antd';
 
 import { getSubUsers } from '../../actions/userActions';
-import Loading from '../Loading';
+import Loading from '../Utils/Loading';
 
 const { Meta } = Card;
 

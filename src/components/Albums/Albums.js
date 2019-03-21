@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Input, Icon } from 'antd';
 
-import Loading from '../Loading';
+import Loading from '../Utils/Loading';
 const { Meta } = Card;
 
 const fileteredData = (albums, query) => {
