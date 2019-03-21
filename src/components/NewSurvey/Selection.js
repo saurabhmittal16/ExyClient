@@ -212,7 +212,7 @@ class SingleSelection extends React.Component {
                             style={{
                                 float: 'right',
                                 position: 'relative',
-                                zIndex: '99',
+                                zIndex: '1',
                                 border: 'none'
                             }}
                         />
