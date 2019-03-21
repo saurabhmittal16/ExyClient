@@ -102,30 +102,13 @@ class SingleSelection extends React.Component {
         if (!startValue || !endValue) {
           return false;
         }
-
-        if (startValue.valueOf() > endValue.valueOf()) {
-            // disable if start is greater than end
-            return true;
-        }
-
-        const now = new Date();
-        // console.log(now);
-        if (startValue.valueOf() > now.valueOf()) {
-            // disable if start is before current time date
-            return true;
-        }
-        return false;
+        return startValue.valueOf() > endValue.valueOf();
     }
     
     disabledEndDate = (endValue) => {
         const startValue = this.props.form.getFieldsValue()['start'];
         if (!endValue || !startValue) {
             return false;
-        }
-        const now = new Date();
-        // console.log(now);     
-        if (endValue.valueOf() > now.valueOf()) {
-            return true;
         }
         return endValue.valueOf() <= startValue.valueOf();
     }
@@ -320,7 +303,7 @@ class SingleSelection extends React.Component {
                                                 })(
                                                     <DatePicker 
                                                         showTime 
-                                                        format="DD-MM-YYYY HH:mm:ss" 
+                                                        format="DD-MM-YYYY HH:mm" 
                                                         disabledDate={this.disabledStartDate}
                                                     />
                                                 )
@@ -338,7 +321,7 @@ class SingleSelection extends React.Component {
                                                 })(
                                                     <DatePicker 
                                                         showTime 
-                                                        format="DD-MM-YYYY HH:mm:ss" 
+                                                        format="DD-MM-YYYY HH:mm" 
                                                         disabledDate={this.disabledEndDate}
                                                     />
                                                 )

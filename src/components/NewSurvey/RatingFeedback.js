@@ -205,7 +205,7 @@ class RatingFeedback extends React.Component {
                                                 })(
                                                     <DatePicker 
                                                         showTime 
-                                                        format="DD-MM-YYYY HH:mm:ss" 
+                                                        format="DD-MM-YYYY HH:mm" 
                                                         disabledDate={this.disabledStartDate}
                                                     />
                                                 )
@@ -223,7 +223,7 @@ class RatingFeedback extends React.Component {
                                                 })(
                                                     <DatePicker 
                                                         showTime 
-                                                        format="DD-MM-YYYY HH:mm:ss" 
+                                                        format="DD-MM-YYYY HH:mm" 
                                                         disabledDate={this.disabledEndDate}
                                                     />
                                                 )
