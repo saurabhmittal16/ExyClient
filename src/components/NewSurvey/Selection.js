@@ -4,6 +4,7 @@ import { Form, Input, Row, Col, Button, Card, Select, DatePicker, Radio, Icon, n
 
 import { addSurvey } from '../../actions/surveyActions';
 import categories from '../../categories';
+import LoadingOverlay from '../Utils/LoadingOverlay';
 
 const FormItem = Form.Item;
 const Option = Select.Option
@@ -57,6 +58,9 @@ class SingleSelection extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            showOverlay: false
+        }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.add = this.add.bind(this);
         this.remove = this.remove.bind(this);
@@ -105,7 +109,7 @@ class SingleSelection extends React.Component {
         }
 
         const now = new Date();
-        console.log(now);
+        // console.log(now);
         if (startValue.valueOf() > now.valueOf()) {
             // disable if start is before current time date
             return true;
@@ -119,7 +123,7 @@ class SingleSelection extends React.Component {
             return false;
         }
         const now = new Date();
-        console.log(now);        
+        // console.log(now);     
         if (endValue.valueOf() > now.valueOf()) {
             return true;
         }
@@ -130,15 +134,23 @@ class SingleSelection extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
+                this.setState({
+                    showOverlay: true
+                });
                 try {
                     await this.props.addSurvey(values, this.props.type);
                     notification.open({
                         message: 'Survey added',
-                        description: 'A new survey was added',
+                        description: 'A new survey was created',
                     });
-                    this.props.history.push('/');
                 } catch (err) {
                     console.log(err);
+                    notification.open({
+                        message: 'Survey not added',
+                        description: 'Some error occured, try again later',
+                    });
+                } finally {
+                    this.props.history.push('/');
                 }
             }
         });
@@ -204,6 +216,7 @@ class SingleSelection extends React.Component {
 
         return (
             <Row>
+                <LoadingOverlay active={this.state.showOverlay} />
                 <Col span={18}>
                     <Card>
                         <Button 
@@ -414,14 +427,9 @@ class SingleSelection extends React.Component {
                     </Card>
                 </Col>
 
-                <Col 
-                    span={6}
-                >
-                    <div
-                        style={{
-                            margin: '30px'
-                        }}
-                    >
+                {/* survey mobile component */}
+                <Col span={6}>
+                    <div style={{ margin: '30px'}} >
                         <div className="mobile">
                             <div className="screen" /> 
                             <div className="content">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Input, Row, Col, Button, Card, Select, DatePicker, Radio, notification } from 'antd';
+import LoadingOverlay from '../Utils/LoadingOverlay';
 
 import { addSurvey } from '../../actions/surveyActions';
 import categories from '../../categories';
@@ -56,6 +57,9 @@ class RatingFeedback extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            showOverlay: false
+        }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -88,15 +92,23 @@ class RatingFeedback extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
+                this.setState({
+                    showOverlay: true
+                });
                 try {
                     await this.props.addSurvey(values, this.props.type);
                     notification.open({
                         message: 'Survey added',
                         description: 'A new survey was added',
                     });
-                    this.props.history.push('/');
                 } catch (err) {
                     console.log(err);
+                    notification.open({
+                        message: 'Survey not added',
+                        description: 'Some error occured, try again later',
+                    });
+                } finally {
+                    this.props.history.push('/');
                 }
             }
         });
@@ -107,6 +119,7 @@ class RatingFeedback extends React.Component {
     
         return (
             <Row>
+                <LoadingOverlay active={this.state.showOverlay} />
                 <Col span={18}>
                     <Card>
                         <Button 
@@ -299,14 +312,9 @@ class RatingFeedback extends React.Component {
                     </Card>
                 </Col>
 
-                <Col 
-                    span={6}
-                >
-                    <div
-                        style={{
-                            margin: '30px'
-                        }}
-                    >
+                {/* survey mobile component */}
+                <Col span={6}>
+                    <div style={{ margin: '30px'}} >
                         <div className="mobile">
                             <div className="screen" /> 
                             <div className="content">
