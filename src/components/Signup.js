@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Col, Row, Input, Button, message } from 'antd';
+import { Form, Col, Row, Input, Button, Tooltip, Icon, message } from 'antd';
 
 import { signup } from '../actions/signupActions';
 
@@ -128,10 +128,29 @@ class Signup extends React.Component {
                                             getFieldDecorator('password',
                                                 {
                                                     rules: [
-                                                        {required: true, message: 'Please enter the Password'}
+                                                        {required: true, message: 'Please enter the Password'},
+                                                        {pattern: /^(?=.*[A-Z]{1,})(?=.*[!@#$&*])(?=.*[0-9]{1,})(?=.*[a-z]).{8,}$/, message: "Please choose a strong password"}
                                                     ]
                                                 })(
-                                                <Input />
+                                                <Input 
+                                                    suffix={
+                                                        <Tooltip title={
+                                                            <div>
+                                                                Password should have:
+                                                                <ul
+                                                                    style={{margin: 0, paddingLeft: '20px'}}
+                                                                >
+                                                                    <li>minimum 8 character</li>
+                                                                    <li>1 uppercase</li>
+                                                                    <li>1 numeric</li>
+                                                                    <li>1 special character</li>
+                                                                </ul>
+                                                            </div>
+                                                        }>
+                                                            <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
+                                                        </Tooltip>
+                                                    }
+                                                />
                                             )
                                         }
                                     </FormItem>

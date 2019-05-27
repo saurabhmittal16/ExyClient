@@ -22,7 +22,7 @@ Axios
 - [ ] Use search bar to fetch results from server  
 - [ ] 404 and Nothing found component
 - [ ] Disable current time in start of new survey form  
-- [ ] Add strong password validation (only frontend)
+- [x] Add strong password validation (only frontend)
 
 ## TASKS -
 
