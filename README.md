@@ -28,3 +28,4 @@ Axios
 
 - [ ] Edit sub user and sub user profile
 - [ ] Better signup page
+- [ ] Add code-splitting (high)
