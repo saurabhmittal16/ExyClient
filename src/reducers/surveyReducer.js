@@ -1,10 +1,12 @@
-import { ADD_SURVEY, CLEAR_SURVEY, GET_UNAPPROVED_SURVEY, GET_APPROVED_SURVEY } from '../actions/types';
+import { ADD_SURVEY, CLEAR_SURVEY, GET_UNAPPROVED_SURVEY, GET_APPROVED_SURVEY, GET_PUBLISHED_SURVEY } from '../actions/types';
 
 const initialState = {
     approvedSurveys: null,
     approvedPage: {},
     unapprovedSurveys: null,
     unapprovedPage: {},
+    publishedSurveys: null,
+    publishedPage: {}
 }
 
 export default (state = initialState, action) => {
@@ -57,6 +59,29 @@ export default (state = initialState, action) => {
                     ...action.payload.data
                 ],
                 approvedPage: {
+                    page: action.payload.page,
+                    last: action.payload.last
+                },
+            }
+        }
+        case GET_PUBLISHED_SURVEY: {
+            if (action.payload.page === 1) {
+                return {
+                    ...state,
+                    publishedSurveys: action.payload.data,
+                    publishedPage: {
+                        page: action.payload.page,
+                        last: action.payload.last
+                    }
+                }
+            }
+            return {
+                ...state,
+                publishedSurveys: [
+                    ...state.publishedSurveys,
+                    ...action.payload.data
+                ],
+                publishedPage: {
                     page: action.payload.page,
                     last: action.payload.last
                 },

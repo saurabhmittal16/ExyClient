@@ -10,6 +10,7 @@ import SubUser from './SubUsers/SubUsers';
 import NewSubUser from './SubUsers/NewSubUser';
 import PendingSurvey from "./ViewSurvey/PendingSurvey";
 import ApprovedSurvey from "./ViewSurvey/ApprovedSurvey";
+import PublishedSurvey from "./ViewSurvey/PublishedSurvey";
 
 class Router extends React.Component {
     render() {
@@ -20,6 +21,7 @@ class Router extends React.Component {
                     <Route exact path='/survey/new' component={NewSurvey} />
                     <Route exact path='/survey/pending' component={PendingSurvey} />
                     <Route exact path='/survey/ready' component={ApprovedSurvey} />
+                    <Route exact path='/survey/published' component={PublishedSurvey} />
                     <Route exact path='/albums' component={Albums} />
                     <Route exact path='/albums/new' component={RequireAdminAuth(NewAlbum)} />
                     <Route exact path='/subusers' component={RequireAdminAuth(SubUser)} />
