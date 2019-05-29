@@ -6,6 +6,7 @@ import { Input, Icon, Button } from 'antd';
 import { getApprovedSurveys, clearSurvey } from '../../actions/surveyActions';
 import SurveyCard from './SurveyCard';
 import Loading from '../Utils/Loading';
+import NoData from '../Utils/NoData';
 
 const fileteredData = (albums, query) => {
     query = query.toLowerCase();
@@ -62,13 +63,15 @@ class ApprovedSurvey extends React.Component {
                 </div>
                 <div>
                 {
-                    this.props.surveys.length > 0 ? fileteredData(this.props.surveys, this.state.query).map(
-                        (obj, index) => (
-                            <SurveyCard
-                                key={index}
-                                survey={obj}
-                            />
-                        )
+                    this.props.surveys !== null ? (
+                        this.props.surveys.length > 0 ? fileteredData(this.props.surveys, this.state.query).map(
+                            (obj, index) => (
+                                <SurveyCard
+                                    key={index}
+                                    survey={obj}
+                                />
+                            )
+                        ) : <NoData title='surveys' />
                     ) : <Loading />
                 }
                     <div className='more'>

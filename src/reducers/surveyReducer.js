@@ -1,9 +1,9 @@
 import { ADD_SURVEY, CLEAR_SURVEY, GET_UNAPPROVED_SURVEY, GET_APPROVED_SURVEY } from '../actions/types';
 
 const initialState = {
-    approvedSurveys: [],
+    approvedSurveys: null,
     approvedPage: {},
-    unapprovedSurveys: [],
+    unapprovedSurveys: null,
     unapprovedPage: {},
 }
 
