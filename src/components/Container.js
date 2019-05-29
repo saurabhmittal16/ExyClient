@@ -196,16 +196,40 @@ class Container extends React.Component {
                     </Layout>
                 </Layout>
                 {
-                    this.props.error && this.props.error.statusCode === 401 && (
-                        <Modal
-                            visible={true}
-                            closable={false}
-                            footer={[
-                                <Button type='primary' onClick={this.redirect}>Ok</Button>
-                            ]}
-                        >
-                            <p>Session expired. You need to login again</p>
-                        </Modal>
+                    this.props.error && (
+                        this.props.error.statusCode === 401 ? (
+                            <Modal
+                                visible={true}
+                                closable={false}
+                                footer={[
+                                    <Button 
+                                        type='primary'
+                                        key='redirect'
+                                        onClick={this.redirect}
+                                    >
+                                        Ok
+                                    </Button>
+                                ]}
+                            >
+                                <p>Session expired. You need to login again</p>
+                            </Modal>
+                        ) : (
+                            <Modal
+                                visible={true}
+                                closable={false}
+                                footer={[
+                                    <Button 
+                                        type='primary' 
+                                        key='refresh'
+                                        onClick={() => window.location.reload()}
+                                    >
+                                        Refresh
+                                    </Button>
+                                ]}
+                            >
+                                <p>Server down. Try again later</p>
+                            </Modal>
+                        )
                     )
                 }
             </div>            

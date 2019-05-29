@@ -9,7 +9,7 @@ export const getUserDetails = () => {
         try {
             const res = await axios.get(`${config.server_url}/api/admin/details`);
             if (res.status === 200) {
-                console.log(res.data);                
+                console.log(res.data);            
                 dispatch({
                     type: CLEAR_ERRORS
                 });
@@ -19,10 +19,9 @@ export const getUserDetails = () => {
                 });
             }
         } catch (err) {
-            console.log(err.response);
             dispatch({
                 type: SET_ERRORS,
-                payload: err.response
+                payload: 'No connection'
             })
         }
     }

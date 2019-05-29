@@ -28,6 +28,6 @@ Axios
 
 - [ ] Edit sub user and sub user profile
 - [ ] Better signup page
-- [ ] Handle server down gracefully
+- [x] Handle server down gracefully
 - [ ] Add code-splitting (high)
 - [x] Handle no surveys found
