@@ -13,7 +13,7 @@ const menus = {
     'sider': [
         ["dashboard", "/", "Dashboard"],
         ["file-done", "/albums", "Albums"],
-        ["wifi", "/survey/ready", "Surveys"],
+        ["wifi", "/survey/published", "Surveys"],
     ],
     'navbar': [
         ["plus", "/survey/new", "Create"],
