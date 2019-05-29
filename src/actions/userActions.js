@@ -9,6 +9,7 @@ export const getUserDetails = () => {
         try {
             const res = await axios.get(`${config.server_url}/api/admin/details`);
             if (res.status === 200) {
+                console.log(res.data);                
                 dispatch({
                     type: CLEAR_ERRORS
                 });

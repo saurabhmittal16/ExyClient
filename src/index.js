@@ -12,7 +12,7 @@ import setAuthHeaders from './utils/setAuthHeaders';
 import { setCurrentUser } from './actions/authActions';
 
 import App from './components/App';
-import './styles/main.css';
+import './styles/main.scss';
 
 const store = createStore(
     rootReducer,

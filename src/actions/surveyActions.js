@@ -60,7 +60,8 @@ export const getUnapprovedSurveys = (page) => {
     return async dispatch => {
         try {
             const res = await axios.get(`${config.server_url}/api/survey/unapproved?page=${page}`);
-            // console.log(`Fetching ${page}`);            
+            // console.log(`Fetching ${page}`); 
+            // console.log(res.data);
             dispatch({
                 type: CLEAR_ERRORS,
             });
@@ -84,6 +85,7 @@ export const getApprovedSurveys = (page) => {
         try {
             const res = await axios.get(`${config.server_url}/api/survey/approved?page=${page}`);
             // console.log(`Fetching ${page}`);
+            // console.log(res.data);
             dispatch({
                 type: CLEAR_ERRORS,
             });

@@ -14,7 +14,7 @@ Axios
 
 ## Authentication using Tokens  
 
-## To Do -
+## To-Do -
 
 - [x] Provide approval policy option according to privilege  
 - [x] Fetch album list  
@@ -28,4 +28,5 @@ Axios
 
 - [ ] Edit sub user and sub user profile
 - [ ] Better signup page
+- [ ] Handle server down gracefully
 - [ ] Add code-splitting (high)
