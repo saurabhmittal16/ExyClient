@@ -1,21 +1,23 @@
-import React from "react";
+import React, { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import RequireAdminAuth from '../utils/requireAdminAuth';
 
-import Dashboard from './Dashboard';
-import NewSurvey from './NewSurvey';
-import Albums from './Albums/Albums';
-import NewAlbum from './Albums/NewAlbum';
-import SubUser from './SubUsers/SubUsers';
-import NewSubUser from './SubUsers/NewSubUser';
-import PendingSurvey from "./ViewSurvey/PendingSurvey";
-import ApprovedSurvey from "./ViewSurvey/ApprovedSurvey";
-import PublishedSurvey from "./ViewSurvey/PublishedSurvey";
+import RequireAdminAuth from '../utils/requireAdminAuth';
+import Loading from './Utils/Loading';
+
+const Dashboard = lazy(() => import('./Dashboard'));
+const NewSurvey = lazy(() => import('./NewSurvey'));
+const Albums = lazy(() => import('./Albums/Albums'));
+const NewAlbum = lazy(() => import('./Albums/NewAlbum'));
+const SubUser = lazy(() => import('./SubUsers/SubUsers'));
+const NewSubUser = lazy(() => import('./SubUsers/NewSubUser'));
+const PendingSurvey = lazy(() => import('./ViewSurvey/PendingSurvey'));
+const ApprovedSurvey = lazy(() => import('./ViewSurvey/ApprovedSurvey'));
+const PublishedSurvey = lazy(() => import('./ViewSurvey/PublishedSurvey'));
 
 class Router extends React.Component {
     render() {
         return (
-            <div>
+            <Suspense fallback={<Loading />}>
                 <Switch>
                     <Route exact path='/' component={Dashboard} />
                     <Route exact path='/survey/new' component={NewSurvey} />
@@ -27,7 +29,7 @@ class Router extends React.Component {
                     <Route exact path='/subusers' component={RequireAdminAuth(SubUser)} />
                     <Route exact path='/subusers/new' component={RequireAdminAuth(NewSubUser)} />
                 </Switch>
-            </div>
+            </Suspense>
         );
     }
 }

@@ -29,5 +29,5 @@ Axios
 - [ ] Edit sub user and sub user profile
 - [ ] Better signup page
 - [x] Handle server down gracefully
-- [ ] Add code-splitting (high)
+- [x] Add code-splitting (high)
 - [x] Handle no surveys found
