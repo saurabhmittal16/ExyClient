@@ -21,6 +21,7 @@ Axios
 - [ ] View result
 - [ ] Edit sub user and sub user profile
 - [ ] Edit survey
+- [ ] Reduce reduntant code in ViewSurvey components (optional)
 - [ ] Better signup page
 - [ ] Disable current time in start of new survey form  
 - [ ] 404 Component

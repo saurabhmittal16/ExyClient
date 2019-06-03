@@ -1,4 +1,4 @@
-import { ADD_SURVEY, CLEAR_SURVEY, GET_UNAPPROVED_SURVEY, GET_APPROVED_SURVEY, GET_PUBLISHED_SURVEY } from '../actions/types';
+import { ADD_SURVEY, CLEAR_SURVEY, GET_UNAPPROVED_SURVEY, GET_APPROVED_SURVEY, GET_PUBLISHED_SURVEY, GET_DISCARDED_SURVEY } from '../actions/types';
 
 const initialState = {
     approvedSurveys: null,
@@ -6,13 +6,15 @@ const initialState = {
     unapprovedSurveys: null,
     unapprovedPage: {},
     publishedSurveys: null,
-    publishedPage: {}
+    publishedPage: {},
+    discardedSurveys: null,
+    discardedPage: {}
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_SURVEY: {
-            // fix: is this required
+            // To-Do: is this required
             return state;
         }
         case CLEAR_SURVEY: {
@@ -82,6 +84,29 @@ export default (state = initialState, action) => {
                     ...action.payload.data
                 ],
                 publishedPage: {
+                    page: action.payload.page,
+                    last: action.payload.last
+                },
+            }
+        }
+        case GET_DISCARDED_SURVEY: {
+            if (action.payload.page === 1) {
+                return {
+                    ...state,
+                    discardedSurveys: action.payload.data,
+                    discardedPage: {
+                        page: action.payload.page,
+                        last: action.payload.last
+                    }
+                }
+            }
+            return {
+                ...state,
+                discardedSurveys: [
+                    ...state.discardedSurveys,
+                    ...action.payload.data
+                ],
+                discardedPage: {
                     page: action.payload.page,
                     last: action.payload.last
                 },

@@ -13,6 +13,7 @@ const NewSubUser = lazy(() => import('./SubUsers/NewSubUser'));
 const PendingSurvey = lazy(() => import('./ViewSurvey/PendingSurvey'));
 const ApprovedSurvey = lazy(() => import('./ViewSurvey/ApprovedSurvey'));
 const PublishedSurvey = lazy(() => import('./ViewSurvey/PublishedSurvey'));
+const DiscardedSurvey = lazy(() => import('./ViewSurvey/DiscardedSurvey'));
 
 class Router extends React.Component {
     render() {
@@ -24,6 +25,7 @@ class Router extends React.Component {
                     <Route exact path='/survey/pending' component={PendingSurvey} />
                     <Route exact path='/survey/ready' component={ApprovedSurvey} />
                     <Route exact path='/survey/published' component={PublishedSurvey} />
+                    <Route exact path='/survey/discarded' component={DiscardedSurvey} />
                     <Route exact path='/albums' component={Albums} />
                     <Route exact path='/albums/new' component={RequireAdminAuth(NewAlbum)} />
                     <Route exact path='/subusers' component={RequireAdminAuth(SubUser)} />
