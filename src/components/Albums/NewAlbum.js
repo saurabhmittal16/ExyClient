@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from 'lodash';
+import { isEmpty } from '../../utils/utils';
 import { connect } from 'react-redux';
 import { Form, Input, Row, Col, Button, Card, notification, message } from 'antd';
 import ErrorComponent from '../Utils/ErrorComponent';
@@ -54,7 +54,7 @@ class NewAlbum extends React.Component {
         return (
             <div>
                 {
-                    !_.isEmpty(this.props.error) && <ErrorComponent history={this.props.history}/>
+                    !isEmpty(this.props.error) && <ErrorComponent history={this.props.history}/>
                 }
                 <Card
                    className='new-form'
